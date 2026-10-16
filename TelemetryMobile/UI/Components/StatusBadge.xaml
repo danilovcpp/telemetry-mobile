@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:c="clr-namespace:TelemetryMobile.UI.Components" x:Class="TelemetryMobile.UI.Components.StatusBadge" x:Name="Root" x:DataType="c:StatusBadge">
+
+    <Border Style="{StaticResource StatusBadgeBorderStyle}" HorizontalOptions="Start">
+        <HorizontalStackLayout Spacing="{StaticResource Space8}">
+            <Ellipse x:Name="Dot" WidthRequest="{StaticResource StatusDotSize}" HeightRequest="{StaticResource StatusDotSize}" VerticalOptions="Center" />
+            <Label x:Name="StatusLabel" Text="{Binding Text, Source={x:Reference Root}}" Style="{StaticResource StatusTextLabelStyle}" />
+        </HorizontalStackLayout>
+    </Border>
+</ContentView>

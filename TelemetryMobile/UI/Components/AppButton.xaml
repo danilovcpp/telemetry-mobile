@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:c="clr-namespace:TelemetryMobile.UI.Components" x:Class="TelemetryMobile.UI.Components.AppButton" x:Name="Root" x:DataType="c:AppButton">
+
+    <Grid>
+        <Button Text="{Binding Text, Source={x:Reference Root}}" Command="{Binding Command, Source={x:Reference Root}}" CommandParameter="{Binding CommandParameter, Source={x:Reference Root}}" Style="{StaticResource PrimaryButtonStyle}">
+            <Button.Triggers>
+                <DataTrigger TargetType="Button" Binding="{Binding IsBusy, Source={x:Reference Root}}" Value="True">
+                    <Setter Property="IsEnabled" Value="False" /><Setter Property="Text" Value="" />
+                </DataTrigger>
+            </Button.Triggers>
+        </Button>
+        <HorizontalStackLayout Spacing="{StaticResource Space8}" HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True" IsVisible="{Binding IsBusy, Source={x:Reference Root}}">
+            <ActivityIndicator IsRunning="{Binding IsBusy, Source={x:Reference Root}}" Color="{DynamicResource ColorTextOnAccent}" WidthRequest="{StaticResource IconSize}" HeightRequest="{StaticResource IconSize}" />
+            <Label Text="{Binding BusyText, Source={x:Reference Root}}" Style="{StaticResource ButtonTextLabelStyle}" TextColor="{DynamicResource ColorTextOnAccent}" VerticalOptions="Center" />
+        </HorizontalStackLayout>
+    </Grid>
+</ContentView>

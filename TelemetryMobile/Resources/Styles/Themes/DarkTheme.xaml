@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Color x:Key="ColorPageBackground">#03121E</Color>
+    <Color x:Key="ColorBackgroundSecondary">#09192B</Color>
+    <Color x:Key="ColorSurfaceCard">#0B1C2D</Color>
+    <Color x:Key="ColorSurfaceElevated">#122840</Color>
+    <Color x:Key="ColorSurfaceInput">#071725</Color>
+    <Color x:Key="ColorBorderSubtle">#203C54</Color>
+    <Color x:Key="ColorAccentPrimary">#218CFF</Color>
+    <Color x:Key="ColorAccentPressed">#1475D6</Color>
+    <Color x:Key="ColorAccentSecondary">#00DDB6</Color>
+    <Color x:Key="ColorStatusSuccess">#00DBA1</Color>
+    <Color x:Key="ColorStatusWarning">#FF9A30</Color>
+    <Color x:Key="ColorStatusError">#FF456B</Color>
+    <Color x:Key="ColorStatusErrorPressed">#DA2E52</Color>
+    <Color x:Key="ColorStatusOffline">#9BB2CE</Color>
+    <Color x:Key="ColorTextPrimary">#F5F8FE</Color>
+    <Color x:Key="ColorTextSecondary">#ACBFDA</Color>
+    <Color x:Key="ColorTextMuted">#8CA3C0</Color>
+    <Color x:Key="ColorTextOnAccent">#FFFFFF</Color>
+    <Color x:Key="ColorTextOnStatus">#03121E</Color>
+    <Color x:Key="ColorChartPurple">#A55CFA</Color>
+    <Color x:Key="ColorTransparent">#00000000</Color>
+</ResourceDictionary>

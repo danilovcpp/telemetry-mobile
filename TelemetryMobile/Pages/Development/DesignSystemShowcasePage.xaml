@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:c="clr-namespace:TelemetryMobile.UI.Components" xmlns:loc="clr-namespace:TelemetryMobile.Localization"
+ x:Class="TelemetryMobile.Pages.Development.DesignSystemShowcasePage" Title="{loc:Translate Showcase}">
+    <ScrollView>
+        <VerticalStackLayout Padding="{StaticResource PagePadding}" Spacing="{StaticResource SectionSpacing}" MaximumWidthRequest="{StaticResource ContentMaxWidth}" HorizontalOptions="Center">
+            <Label Text="{loc:Translate Showcase}" Style="{StaticResource PageTitleLabelStyle}" SemanticProperties.HeadingLevel="Level1" />
+            <Picker x:Name="LanguagePicker" Title="{loc:Translate Language}" SelectedIndexChanged="OnLanguageChanged" TextColor="{DynamicResource ColorTextPrimary}">
+                <Picker.Items><x:String>RU</x:String><x:String>EN</x:String><x:String>DE</x:String></Picker.Items>
+            </Picker>
+            <c:SectionHeader Title="{loc:Translate Palette}" />
+            <FlexLayout Wrap="Wrap">
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorPageBackground}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorPageBackground" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorBackgroundSecondary}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorBackgroundSecondary" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorSurfaceCard}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorSurfaceCard" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorSurfaceElevated}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorSurfaceElevated" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorSurfaceInput}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorSurfaceInput" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorBorderSubtle}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorBorderSubtle" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorAccentPrimary}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorAccentPrimary" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorAccentPressed}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorAccentPressed" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorAccentSecondary}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorAccentSecondary" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorStatusSuccess}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorStatusSuccess" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorStatusWarning}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorStatusWarning" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorStatusError}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorStatusError" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorStatusErrorPressed}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorStatusErrorPressed" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorStatusOffline}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorStatusOffline" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorTextPrimary}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorTextPrimary" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorTextSecondary}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorTextSecondary" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorTextMuted}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorTextMuted" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorTextOnAccent}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorTextOnAccent" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorTextOnStatus}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorTextOnStatus" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorChartPurple}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorChartPurple" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+                <Border FlexLayout.Shrink="0" BackgroundColor="{DynamicResource ColorTransparent}" Stroke="{DynamicResource ColorBorderSubtle}" StrokeShape="{StaticResource ShapeSmall}" Margin="4" Padding="12"><Label Text="ColorTransparent" TextColor="{DynamicResource ColorTextPrimary}" BackgroundColor="{DynamicResource ColorPageBackground}" LineBreakMode="NoWrap" Style="{StaticResource CaptionLabelStyle}" /></Border>
+            </FlexLayout>
+            <c:SectionHeader Title="{loc:Translate Typography}" />
+            <Label Text="Display" Style="{StaticResource DisplayLabelStyle}" />
+            <Label Text="PageTitle" Style="{StaticResource PageTitleLabelStyle}" />
+            <Label Text="SectionTitle" Style="{StaticResource SectionTitleLabelStyle}" />
+            <Label Text="CardTitle" Style="{StaticResource CardTitleLabelStyle}" />
+            <Label Text="Body" Style="{StaticResource BodyLabelStyle}" />
+            <Label Text="BodySecondary" Style="{StaticResource BodySecondaryLabelStyle}" />
+            <Label Text="Caption" Style="{StaticResource CaptionLabelStyle}" />
+            <Label Text="MetricValue" Style="{StaticResource MetricValueLabelStyle}" />
+            <Label Text="ButtonText" Style="{StaticResource ButtonTextLabelStyle}" />
+            <Label Text="StatusText" Style="{StaticResource StatusTextLabelStyle}" />
+            <Label Text="Timestamp" Style="{StaticResource TimestampLabelStyle}" />
+            <c:SectionHeader Title="{loc:Translate Buttons}" />
+            <Button Text="Primary" Style="{StaticResource PrimaryButtonStyle}" Clicked="OnButtonClicked" />
+            <Button Text="Secondary" Style="{StaticResource SecondaryButtonStyle}" Clicked="OnButtonClicked" />
+            <Button Text="Outline" Style="{StaticResource OutlineButtonStyle}" Clicked="OnButtonClicked" />
+            <Button Text="Text" Style="{StaticResource TextButtonStyle}" Clicked="OnButtonClicked" />
+            <Button Text="Danger" Style="{StaticResource DangerButtonStyle}" Clicked="OnButtonClicked" />
+            <Button Text="+" Style="{StaticResource IconButtonStyle}" Clicked="OnButtonClicked" SemanticProperties.Description="{loc:Translate All}" />
+            <Button Text="{loc:Translate Disabled}" IsEnabled="False" />
+            <c:AppButton Text="{loc:Translate SignIn}" BusyText="{loc:Translate Loading}" IsBusy="True" />
+            <Label x:Name="Feedback" Style="{StaticResource CaptionLabelStyle}" />
+            <c:SectionHeader Title="{loc:Translate Inputs}" />
+            <c:AppTextField Placeholder="{loc:Translate CustomerId}" LeadingIcon="person.png" />
+            <c:AppTextField Placeholder="{loc:Translate Password}" IsPassword="True" LeadingIcon="lock.png" />
+            <c:AppTextField Placeholder="{loc:Translate CustomerId}" Text="{loc:Translate FieldSample}" ErrorText="{loc:Translate SampleError}" />
+            <c:AppTextField Placeholder="{loc:Translate Disabled}" IsEnabled="False" />
+            <c:SectionHeader Title="{loc:Translate Statuses}" />
+            <c:StatusBadge State="Online" Text="{loc:Translate Online}" />
+            <c:StatusBadge State="Offline" Text="{loc:Translate Offline}" />
+            <c:StatusBadge State="Warning" Text="{loc:Translate Warning}" />
+            <c:StatusBadge State="Error" Text="{loc:Translate Error}" />
+            <c:StatusBadge State="Unknown" Text="{loc:Translate Unknown}" />
+            <c:SectionHeader Title="{loc:Translate Cards}" />
+            <Border Style="{StaticResource StandardCard}"><Label Text="StandardCard" /></Border>
+            <Border Style="{StaticResource ElevatedCard}"><Label Text="ElevatedCard" /></Border>
+            <Border Style="{StaticResource InteractiveCard}"><Label Text="InteractiveCard" /></Border>
+            <Border Style="{StaticResource SummaryCard}"><Label Text="SummaryCard" /></Border>
+            <c:DeviceCard x:Name="SampleDevice" Name="{loc:Translate SampleDevice}" SecondaryText="192.168.1.10" StatusText="{loc:Translate Online}" State="Online" Icon="server.png" ShowNavigation="True" />
+            <c:SummaryStatCard Caption="{loc:Translate Online}" Value="12" State="Online" />
+            <c:SectionHeader Title="{loc:Translate Metrics}" />
+            <Border Style="{StaticResource StandardCard}" Padding="0">
+                <c:MetricRow Name="{loc:Translate SampleMetric}" Value="42" Unit="°C" Trend="{loc:Translate SampleTrend}" Icon="temperature.png" />
+            </Border>
+            <c:SectionHeader Title="{loc:Translate Events}" ActionText="{loc:Translate All}" x:Name="EventsHeader" />
+            <Border Style="{StaticResource StandardCard}" Padding="0">
+                <c:EventListItem Title="{loc:Translate SampleEvent}" Description="{loc:Translate SampleDevice}" Timestamp="09:41" State="Online" StatusText="{loc:Translate Online}" />
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

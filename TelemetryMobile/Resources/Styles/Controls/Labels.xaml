@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Tokens/Typography.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="BodyLabelStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource FontBody}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeBody}" />
+        <Setter Property="LineHeight" Value="{StaticResource LineHeightBody}" />
+        <Setter Property="TextColor" Value="{DynamicResource ColorTextPrimary}" />
+        <Setter Property="FontAutoScalingEnabled" Value="True" />
+    </Style>
+    <Style TargetType="Label" BasedOn="{StaticResource BodyLabelStyle}" />
+    <Style x:Key="DisplayLabelStyle" TargetType="Label" BasedOn="{StaticResource BodyLabelStyle}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeDisplay}" />
+        <Setter Property="TextColor" Value="{DynamicResource ColorTextPrimary}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="LineHeight" Value="{StaticResource LineHeightHeading}" />
+    </Style>
+    <Style x:Key="PageTitleLabelStyle" TargetType="Label" BasedOn="{StaticResource BodyLabelStyle}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizePageTitle}" />
+        <Setter Property="TextColor" Value="{DynamicResource ColorTextPrimary}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="LineHeight" Value="{StaticResource LineHeightHeading}" />
+    </Style>
+    <Style x:Key="SectionTitleLabelStyle" TargetType="Label" BasedOn="{StaticResource BodyLabelStyle}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeSectionTitle}" />
+        <Setter Property="TextColor" Value="{DynamicResource ColorTextPrimary}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="LineHeight" Value="{StaticResource LineHeightHeading}" />
+    </Style>
+    <Style x:Key="CardTitleLabelStyle" TargetType="Label" BasedOn="{StaticResource BodyLabelStyle}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeCardTitle}" />
+        <Setter Property="TextColor" Value="{DynamicResource ColorTextPrimary}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="LineHeight" Value="{StaticResource LineHeightHeading}" />
+    </Style>
+    <Style x:Key="BodySecondaryLabelStyle" TargetType="Label" BasedOn="{StaticResource BodyLabelStyle}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeBodySecondary}" />
+        <Setter Property="TextColor" Value="{DynamicResource ColorTextSecondary}" />
+    </Style>
+    <Style x:Key="CaptionLabelStyle" TargetType="Label" BasedOn="{StaticResource BodyLabelStyle}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeCaption}" />
+        <Setter Property="TextColor" Value="{DynamicResource ColorTextMuted}" />
+    </Style>
+    <Style x:Key="MetricValueLabelStyle" TargetType="Label" BasedOn="{StaticResource BodyLabelStyle}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeMetricValue}" />
+        <Setter Property="TextColor" Value="{DynamicResource ColorTextPrimary}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="LineHeight" Value="{StaticResource LineHeightHeading}" />
+    </Style>
+    <Style x:Key="ButtonTextLabelStyle" TargetType="Label" BasedOn="{StaticResource BodyLabelStyle}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeButtonText}" />
+        <Setter Property="TextColor" Value="{DynamicResource ColorTextPrimary}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="LineHeight" Value="{StaticResource LineHeightHeading}" />
+    </Style>
+    <Style x:Key="StatusTextLabelStyle" TargetType="Label" BasedOn="{StaticResource BodyLabelStyle}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeStatusText}" />
+        <Setter Property="TextColor" Value="{DynamicResource ColorTextSecondary}" />
+    </Style>
+    <Style x:Key="TimestampLabelStyle" TargetType="Label" BasedOn="{StaticResource BodyLabelStyle}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeCaption}" />
+        <Setter Property="TextColor" Value="{DynamicResource ColorTextSecondary}" />
+    </Style>
+
+</ResourceDictionary>

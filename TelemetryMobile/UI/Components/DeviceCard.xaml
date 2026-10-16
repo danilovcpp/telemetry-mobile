@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:c="clr-namespace:TelemetryMobile.UI.Components" x:Class="TelemetryMobile.UI.Components.DeviceCard" x:Name="Root" x:DataType="c:DeviceCard">
+
+    <Border Style="{StaticResource InteractiveCard}">
+        <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="{StaticResource ContentSpacing}" RowSpacing="{StaticResource Space4}">
+            <Image Source="{Binding Icon, Source={x:Reference Root}}" Grid.RowSpan="3" WidthRequest="{StaticResource IconSize}" HeightRequest="{StaticResource IconSize}" Margin="0,0,12,0" AutomationProperties.IsInAccessibleTree="False" />
+            <Label Grid.Column="1" Text="{Binding Name, Source={x:Reference Root}}" Style="{StaticResource CardTitleLabelStyle}" />
+            <Label Grid.Column="1" Grid.Row="1" Text="{Binding SecondaryText, Source={x:Reference Root}}" Style="{StaticResource BodySecondaryLabelStyle}" />
+            <c:StatusBadge Grid.Column="1" Grid.Row="2" Text="{Binding StatusText, Source={x:Reference Root}}" State="{Binding State, Source={x:Reference Root}}" />
+            <Image Grid.Column="2" Grid.RowSpan="3" Source="chevron.png" IsVisible="{Binding ShowNavigation, Source={x:Reference Root}}" WidthRequest="{StaticResource IconSizeSmall}" HeightRequest="{StaticResource IconSizeSmall}" AutomationProperties.IsInAccessibleTree="False" />
+            <Button Grid.ColumnSpan="3" Grid.RowSpan="3" Command="{Binding Command, Source={x:Reference Root}}" CommandParameter="{Binding CommandParameter, Source={x:Reference Root}}" IsVisible="{Binding IsInteractive, Source={x:Reference Root}}"
+                Style="{StaticResource CardActionButtonStyle}" SemanticProperties.Description="{Binding Name, Source={x:Reference Root}}" />
+        </Grid>
+    </Border>
+</ContentView>
