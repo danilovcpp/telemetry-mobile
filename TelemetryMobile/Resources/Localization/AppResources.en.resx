@@ -38,4 +38,40 @@ Your infrastructure at your fingertips.</value></data>
   <data name="FieldSample" xml:space="preserve"><value>Sample value</value></data>
   <data name="SampleError" xml:space="preserve"><value>Check the entered value.</value></data>
   <data name="Language" xml:space="preserve"><value>Language</value></data>
+  <data name="LightTheme" xml:space="preserve"><value>Light theme</value></data>
+  <data name="Devices" xml:space="preserve"><value>Devices</value></data>
+  <data name="Search" xml:space="preserve"><value>Search</value></data>
+  <data name="SearchDevices" xml:space="preserve"><value>Name or IP address</value></data>
+  <data name="Menu" xml:space="preserve"><value>Menu</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="SignOut" xml:space="preserve"><value>Sign out</value></data>
+  <data name="Filter" xml:space="preserve"><value>Filter</value></data>
+  <data name="Back" xml:space="preserve"><value>Back</value></data>
+  <data name="DemoCredentials" xml:space="preserve"><value>Demo sign-in: test / test</value></data>
+  <data name="InvalidCredentials" xml:space="preserve"><value>Invalid credentials. Use test / test for the demo.</value></data>
+  <data name="NoDevices" xml:space="preserve"><value>No devices found. Try another search or filter.</value></data>
+  <data name="NoEvents" xml:space="preserve"><value>No events to display.</value></data>
+  <data name="Information" xml:space="preserve"><value>Information</value></data>
+  <data name="Alarm" xml:space="preserve"><value>Alarms</value></data>
+  <data name="IpAddress" xml:space="preserve"><value>IP address</value></data>
+  <data name="LastContact" xml:space="preserve"><value>Last contact</value></data>
+  <data name="SoftwareVersion" xml:space="preserve"><value>Software version</value></data>
+  <data name="Model" xml:space="preserve"><value>Model</value></data>
+  <data name="Today" xml:space="preserve"><value>Today</value></data>
+  <data name="MetricsUnavailable" xml:space="preserve"><value>Device is offline. Current metrics are unavailable.</value></data>
+  <data name="Cpu" xml:space="preserve"><value>CPU</value></data>
+  <data name="Memory" xml:space="preserve"><value>Memory</value></data>
+  <data name="Temperature" xml:space="preserve"><value>Temperature</value></data>
+  <data name="Network" xml:space="preserve"><value>Network (in/out)</value></data>
+  <data name="Mbps" xml:space="preserve"><value>Mbps</value></data>
+  <data name="Humidity" xml:space="preserve"><value>Humidity</value></data>
+  <data name="Battery" xml:space="preserve"><value>Battery</value></data>
+  <data name="Load" xml:space="preserve"><value>Load</value></data>
+  <data name="FanSpeed" xml:space="preserve"><value>Fan speed</value></data>
+  <data name="DeviceOnline" xml:space="preserve"><value>Device online</value></data>
+  <data name="TemperatureNormal" xml:space="preserve"><value>Temperature normal</value></data>
+  <data name="ConnectionInterrupted" xml:space="preserve"><value>Brief connection interruption</value></data>
+  <data name="HighTemperature" xml:space="preserve"><value>High temperature</value></data>
+  <data name="ScheduledRestart" xml:space="preserve"><value>Scheduled restart</value></data>
+  <data name="PowerFailure" xml:space="preserve"><value>Power failure</value></data>
 </root>

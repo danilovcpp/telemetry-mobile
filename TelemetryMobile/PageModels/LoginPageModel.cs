@@ -1,10 +1,11 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using TelemetryMobile.Localization;
+using TelemetryMobile.Services;
 
 namespace TelemetryMobile.PageModels;
 
-public partial class LoginPageModel : ObservableObject
+public partial class LoginPageModel(DemoNavigationService navigation) : ObservableObject
 {
     [ObservableProperty] private string customerId = string.Empty;
     [ObservableProperty] private string password = string.Empty;
@@ -20,9 +21,16 @@ public partial class LoginPageModel : ObservableObject
     {
         CustomerIdInvalid = string.IsNullOrWhiteSpace(CustomerId);
         PasswordInvalid = string.IsNullOrEmpty(Password);
-        AuthUnavailable = !CustomerIdInvalid && !PasswordInvalid;
-        // Preserve the existing behavior until a real authentication service is connected.
-        // No mock session, credential persistence, or fabricated business navigation.
+        if (CustomerIdInvalid || PasswordInvalid) return;
+        if (CustomerId.Trim() == "test" && Password == "test")
+        {
+            Password = string.Empty;
+            navigation.SignIn();
+        }
+        else
+        {
+            AuthUnavailable = true;
+        }
     }
 
     [RelayCommand]

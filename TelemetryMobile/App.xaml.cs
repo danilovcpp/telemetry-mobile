@@ -8,7 +8,7 @@ public partial class App : Application
     {
         InitializeComponent();
         this.services = services;
-        UserAppTheme = AppTheme.Dark;
+        Theming.ThemeManager.Instance.Initialize(this);
         LocalizationManager.Instance.Initialize();
     }
 

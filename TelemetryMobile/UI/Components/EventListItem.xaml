@@ -2,10 +2,13 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
  xmlns:c="clr-namespace:TelemetryMobile.UI.Components" x:Class="TelemetryMobile.UI.Components.EventListItem" x:Name="Root" x:DataType="c:EventListItem">
 
-    <Grid Style="{StaticResource CollectionItemStyle}" RowDefinitions="Auto,Auto,Auto,Auto">
-        <Label Text="{Binding Title, Source={x:Reference Root}}" Style="{StaticResource CardTitleLabelStyle}" />
-        <Label Grid.Row="1" Text="{Binding Description, Source={x:Reference Root}}" Style="{StaticResource BodySecondaryLabelStyle}" />
-        <c:StatusBadge Grid.Row="2" Text="{Binding StatusText, Source={x:Reference Root}}" State="{Binding State, Source={x:Reference Root}}" />
-        <Label Grid.Row="3" Text="{Binding Timestamp, Source={x:Reference Root}}" Style="{StaticResource TimestampLabelStyle}" />
+    <Grid Padding="0,16,0,0" ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="{StaticResource Space12}" RowSpacing="{StaticResource Space8}">
+        <Ellipse x:Name="StatusDot" WidthRequest="16" HeightRequest="16" VerticalOptions="Start" Margin="0,4,0,0" SemanticProperties.Description="{Binding StatusText, Source={x:Reference Root}}" />
+        <Label Grid.Column="1" Text="{Binding Title, Source={x:Reference Root}}" Style="{StaticResource CardTitleLabelStyle}" />
+        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Description, Source={x:Reference Root}}" Style="{StaticResource BodySecondaryLabelStyle}">
+            <Label.Triggers><DataTrigger TargetType="Label" Binding="{Binding Description, Source={x:Reference Root}}" Value=""><Setter Property="IsVisible" Value="False" /></DataTrigger></Label.Triggers>
+        </Label>
+        <Label Grid.Column="2" Text="{Binding Timestamp, Source={x:Reference Root}}" Style="{StaticResource TimestampLabelStyle}" />
+        <BoxView Grid.Row="2" Grid.ColumnSpan="3" Color="{DynamicResource ColorBorderSubtle}" HeightRequest="1" Margin="0,8,0,0" />
     </Grid>
 </ContentView>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
- xmlns:c="clr-namespace:TelemetryMobile.UI.Components" x:Class="TelemetryMobile.UI.Components.AppTextField" x:Name="Root" x:DataType="c:AppTextField">
+ xmlns:theme="clr-namespace:TelemetryMobile.Theming" xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" xmlns:c="clr-namespace:TelemetryMobile.UI.Components" x:Class="TelemetryMobile.UI.Components.AppTextField" x:Name="Root" x:DataType="c:AppTextField">
 
     <VerticalStackLayout Spacing="{StaticResource Space4}">
         <Border x:Name="Container" Style="{StaticResource InputBorderStyle}">
@@ -13,14 +13,14 @@
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
             <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="{StaticResource Space12}">
-                <Image Source="{Binding LeadingIcon, Source={x:Reference Root}}" IsVisible="{Binding HasLeadingIcon, Source={x:Reference Root}}" WidthRequest="{StaticResource IconSize}" HeightRequest="{StaticResource IconSize}" InputTransparent="True" AutomationProperties.IsInAccessibleTree="False" />
+                <Image Source="{Binding LeadingIcon, Source={x:Reference Root}}" IsVisible="{Binding HasLeadingIcon, Source={x:Reference Root}}" WidthRequest="{StaticResource IconSize}" HeightRequest="{StaticResource IconSize}" InputTransparent="True" AutomationProperties.IsInAccessibleTree="False"><Image.Behaviors><toolkit:IconTintColorBehavior TintColor="{Binding IconTintColor, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}" /></Image.Behaviors></Image>
                 <Entry x:Name="Input" Grid.Column="1" Text="{Binding Text, Source={x:Reference Root}}" Placeholder="{Binding Placeholder, Source={x:Reference Root}}"
                     IsPassword="{Binding IsPassword, Source={x:Reference Root}}" Keyboard="{Binding Keyboard, Source={x:Reference Root}}" ReturnType="{Binding ReturnType, Source={x:Reference Root}}" IsReadOnly="{Binding IsReadOnly, Source={x:Reference Root}}"
                     IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" Focused="OnFocusChanged" Unfocused="OnFocusChanged"
                     Completed="OnCompleted" HandlerChanged="OnEntryHandlerChanged" SemanticProperties.Description="{Binding Placeholder, Source={x:Reference Root}}" SemanticProperties.Hint="{Binding ErrorText, Source={x:Reference Root}}" />
                 <ImageButton Grid.Column="2" Source="{Binding TrailingIcon, Source={x:Reference Root}}" IsVisible="{Binding HasTrailingIcon, Source={x:Reference Root}}" Command="{Binding TrailingCommand, Source={x:Reference Root}}"
                     SemanticProperties.Description="{Binding TrailingDescription, Source={x:Reference Root}}" MinimumWidthRequest="{StaticResource TouchTarget}" MinimumHeightRequest="{StaticResource TouchTarget}"
-                    BackgroundColor="{DynamicResource ColorTransparent}" Padding="{StaticResource IconPadding}" />
+                    BackgroundColor="{DynamicResource ColorTransparent}" Padding="{StaticResource IconPadding}"><ImageButton.Behaviors><toolkit:IconTintColorBehavior TintColor="{Binding IconTintColor, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}" /></ImageButton.Behaviors></ImageButton>
             </Grid>
         </Border>
         <Label Text="{Binding ErrorText, Source={x:Reference Root}}" IsVisible="{Binding HasError, Source={x:Reference Root}}" Style="{StaticResource CaptionLabelStyle}" TextColor="{DynamicResource ColorStatusError}" />

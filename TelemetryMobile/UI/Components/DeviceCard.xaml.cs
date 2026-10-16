@@ -2,7 +2,18 @@ using System.Windows.Input;
 namespace TelemetryMobile.UI.Components;
 public partial class DeviceCard : ContentView
 {
-    public DeviceCard() => InitializeComponent();
+    public DeviceCard()
+    {
+        InitializeComponent();
+        SizeChanged += (_, _) =>
+        {
+            // Keep the reference's inline status where space permits; stack it on narrow screens.
+            var inline = Width >= 340;
+            Grid.SetColumn(DeviceStatus, inline ? 2 : 1);
+            Grid.SetRow(DeviceStatus, inline ? 0 : 2);
+            Grid.SetRowSpan(DeviceStatus, inline ? 2 : 1);
+        };
+    }
     public static readonly BindableProperty IconProperty = BindableProperty.Create(nameof(Icon), typeof(ImageSource), typeof(DeviceCard), null);
     public ImageSource Icon { get => (ImageSource)GetValue(IconProperty); set => SetValue(IconProperty, value); }
 

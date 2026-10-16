@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TelemetryMobile.Resources.Styles.Themes.LightTheme">
+    <Color x:Key="ColorPageBackground">#F4F8FC</Color>
+    <Color x:Key="ColorBackgroundSecondary">#EAF1F8</Color>
+    <Color x:Key="ColorSurfaceCard">#FFFFFF</Color>
+    <Color x:Key="ColorSurfaceElevated">#E2ECF6</Color>
+    <Color x:Key="ColorSurfaceInput">#FFFFFF</Color>
+    <Color x:Key="ColorBorderSubtle">#B8CADC</Color>
+    <Color x:Key="ColorAccentPrimary">#0065CC</Color>
+    <Color x:Key="ColorAccentPressed">#0052A6</Color>
+    <Color x:Key="ColorAccentSecondary">#007F70</Color>
+    <Color x:Key="ColorStatusSuccess">#007A58</Color>
+    <Color x:Key="ColorStatusWarning">#9A4A00</Color>
+    <Color x:Key="ColorStatusError">#C42146</Color>
+    <Color x:Key="ColorStatusErrorPressed">#A51939</Color>
+    <Color x:Key="ColorStatusOffline">#52677E</Color>
+    <Color x:Key="ColorTextPrimary">#102A43</Color>
+    <Color x:Key="ColorTextSecondary">#435D78</Color>
+    <Color x:Key="ColorTextMuted">#526B83</Color>
+    <Color x:Key="ColorTextOnAccent">#FFFFFF</Color>
+    <Color x:Key="ColorTextOnStatus">#FFFFFF</Color>
+    <Color x:Key="ColorChartPurple">#7638C4</Color>
+    <Color x:Key="ColorTransparent">#00000000</Color>
+</ResourceDictionary>

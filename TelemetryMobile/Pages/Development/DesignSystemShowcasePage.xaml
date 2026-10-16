@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
  xmlns:c="clr-namespace:TelemetryMobile.UI.Components" xmlns:loc="clr-namespace:TelemetryMobile.Localization"
+ xmlns:theme="clr-namespace:TelemetryMobile.Theming"
  x:Class="TelemetryMobile.Pages.Development.DesignSystemShowcasePage" Title="{loc:Translate Showcase}">
     <ScrollView>
         <VerticalStackLayout Padding="{StaticResource PagePadding}" Spacing="{StaticResource SectionSpacing}" MaximumWidthRequest="{StaticResource ContentMaxWidth}" HorizontalOptions="Center">
             <Label Text="{loc:Translate Showcase}" Style="{StaticResource PageTitleLabelStyle}" SemanticProperties.HeadingLevel="Level1" />
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="{StaticResource Space12}">
+                <Label Text="{loc:Translate LightTheme}" VerticalOptions="Center" />
+                <Switch Grid.Column="1" IsToggled="{Binding IsLightTheme, Source={x:Static theme:ThemeManager.Instance}, Mode=TwoWay, x:DataType=theme:ThemeManager}"
+                    OnColor="{DynamicResource ColorAccentPrimary}" ThumbColor="{DynamicResource ColorTextOnAccent}"
+                    MinimumHeightRequest="{StaticResource TouchTarget}" SemanticProperties.Description="{loc:Translate LightTheme}" />
+            </Grid>
             <Picker x:Name="LanguagePicker" Title="{loc:Translate Language}" SelectedIndexChanged="OnLanguageChanged" TextColor="{DynamicResource ColorTextPrimary}">
                 <Picker.Items><x:String>RU</x:String><x:String>EN</x:String><x:String>DE</x:String></Picker.Items>
             </Picker>

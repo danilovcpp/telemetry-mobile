@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:c="clr-namespace:TelemetryMobile.UI.Components" xmlns:vm="clr-namespace:TelemetryMobile.PageModels"
+ xmlns:loc="clr-namespace:TelemetryMobile.Localization" xmlns:theme="clr-namespace:TelemetryMobile.Theming"
+ xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+ x:Class="TelemetryMobile.Pages.DevicesPage" x:DataType="vm:DevicesPageModel" Title="{loc:Translate Devices}"
+ Shell.NavBarIsVisible="False" SafeAreaEdges="All">
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{Binding PageBackgroundColor, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}"
+            StatusBarStyle="{Binding StatusBarStyle, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}" />
+    </ContentPage.Behaviors>
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" RowSpacing="{StaticResource Space12}" Padding="{StaticResource PagePadding}"
+        MaximumWidthRequest="{StaticResource ContentMaxWidth}" HorizontalOptions="Center">
+        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="{StaticResource Space4}">
+            <Label Text="{loc:Translate Devices}" Style="{StaticResource PageTitleLabelStyle}" VerticalOptions="Center" SemanticProperties.HeadingLevel="Level1" />
+            <ImageButton Grid.Column="1" Source="search.png" Command="{Binding ToggleSearchCommand}" SemanticProperties.Description="{loc:Translate Search}"
+                BackgroundColor="{DynamicResource ColorTransparent}" Padding="{StaticResource IconPadding}" WidthRequest="{StaticResource TouchTarget}" HeightRequest="{StaticResource TouchTarget}">
+                <ImageButton.Behaviors><toolkit:IconTintColorBehavior TintColor="{Binding IconTintColor, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}" /></ImageButton.Behaviors>
+            </ImageButton>
+            <ImageButton Grid.Column="2" Source="filter.png" Clicked="OnMenuClicked" SemanticProperties.Description="{loc:Translate Filter}"
+                BackgroundColor="{DynamicResource ColorTransparent}" Padding="{StaticResource IconPadding}" WidthRequest="{StaticResource TouchTarget}" HeightRequest="{StaticResource TouchTarget}">
+                <ImageButton.Behaviors><toolkit:IconTintColorBehavior TintColor="{Binding IconTintColor, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}" /></ImageButton.Behaviors>
+            </ImageButton>
+        </Grid>
+        <c:AppTextField x:Name="SearchField" Grid.Row="1" IsVisible="{Binding IsSearchVisible}" Text="{Binding SearchText}" Placeholder="{loc:Translate SearchDevices}" LeadingIcon="search.png" />
+        <c:FilterBar Grid.Row="2" Items="{Binding Filters}" />
+        <ScrollView x:Name="SummaryScroll" Grid.Row="3" Orientation="Horizontal" HorizontalScrollBarVisibility="Never" SizeChanged="OnSummarySizeChanged">
+            <HorizontalStackLayout Spacing="{StaticResource Space8}">
+                <c:SummaryStatCard x:Name="OnlineSummary" WidthRequest="104" Value="{Binding OnlineCount}" Caption="{loc:Translate Online}" State="Online" />
+                <c:SummaryStatCard x:Name="OfflineSummary" WidthRequest="104" Value="{Binding OfflineCount}" Caption="{loc:Translate Offline}" State="Offline" />
+                <c:SummaryStatCard x:Name="ErrorSummary" WidthRequest="104" Value="{Binding ErrorCount}" Caption="{loc:Translate Error}" State="Error" />
+            </HorizontalStackLayout>
+        </ScrollView>
+        <CollectionView Grid.Row="4" ItemsSource="{Binding Devices}" SelectionMode="None" VerticalScrollBarVisibility="Never">
+            <CollectionView.ItemsLayout><LinearItemsLayout Orientation="Vertical" ItemSpacing="12" /></CollectionView.ItemsLayout>
+            <CollectionView.EmptyView><Label Text="{loc:Translate NoDevices}" Style="{StaticResource BodySecondaryLabelStyle}" Margin="0,24" HorizontalTextAlignment="Center" /></CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:DeviceItem">
+                    <c:DeviceCard Icon="{Binding Icon}" Name="{Binding Name}" SecondaryText="{Binding Address}" State="{Binding State}"
+                        StatusText="{Binding StatusText}" ShowNavigation="True" Command="{Binding OpenCommand}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

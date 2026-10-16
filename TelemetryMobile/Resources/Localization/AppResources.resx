@@ -38,4 +38,40 @@
   <data name="FieldSample" xml:space="preserve"><value>Пример значения</value></data>
   <data name="SampleError" xml:space="preserve"><value>Проверьте введённое значение.</value></data>
   <data name="Language" xml:space="preserve"><value>Язык</value></data>
+  <data name="LightTheme" xml:space="preserve"><value>Светлая тема</value></data>
+  <data name="Devices" xml:space="preserve"><value>Устройства</value></data>
+  <data name="Search" xml:space="preserve"><value>Поиск</value></data>
+  <data name="SearchDevices" xml:space="preserve"><value>Название или IP-адрес</value></data>
+  <data name="Menu" xml:space="preserve"><value>Меню</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="SignOut" xml:space="preserve"><value>Выйти</value></data>
+  <data name="Filter" xml:space="preserve"><value>Фильтр</value></data>
+  <data name="Back" xml:space="preserve"><value>Назад</value></data>
+  <data name="DemoCredentials" xml:space="preserve"><value>Демо-вход: test / test</value></data>
+  <data name="InvalidCredentials" xml:space="preserve"><value>Неверные данные. Для демо используйте test / test.</value></data>
+  <data name="NoDevices" xml:space="preserve"><value>Устройства не найдены. Измените поиск или фильтр.</value></data>
+  <data name="NoEvents" xml:space="preserve"><value>Событий пока нет.</value></data>
+  <data name="Information" xml:space="preserve"><value>Информация</value></data>
+  <data name="Alarm" xml:space="preserve"><value>Аварии</value></data>
+  <data name="IpAddress" xml:space="preserve"><value>IP-адрес</value></data>
+  <data name="LastContact" xml:space="preserve"><value>Последний контакт</value></data>
+  <data name="SoftwareVersion" xml:space="preserve"><value>Версия ПО</value></data>
+  <data name="Model" xml:space="preserve"><value>Модель</value></data>
+  <data name="Today" xml:space="preserve"><value>Сегодня</value></data>
+  <data name="MetricsUnavailable" xml:space="preserve"><value>Устройство оффлайн. Текущие показатели недоступны.</value></data>
+  <data name="Cpu" xml:space="preserve"><value>CPU</value></data>
+  <data name="Memory" xml:space="preserve"><value>Память</value></data>
+  <data name="Temperature" xml:space="preserve"><value>Температура</value></data>
+  <data name="Network" xml:space="preserve"><value>Сеть (вход/выход)</value></data>
+  <data name="Mbps" xml:space="preserve"><value>Мбит/с</value></data>
+  <data name="Humidity" xml:space="preserve"><value>Влажность</value></data>
+  <data name="Battery" xml:space="preserve"><value>Заряд батареи</value></data>
+  <data name="Load" xml:space="preserve"><value>Нагрузка</value></data>
+  <data name="FanSpeed" xml:space="preserve"><value>Скорость вентилятора</value></data>
+  <data name="DeviceOnline" xml:space="preserve"><value>Устройство в сети</value></data>
+  <data name="TemperatureNormal" xml:space="preserve"><value>Температура в норме</value></data>
+  <data name="ConnectionInterrupted" xml:space="preserve"><value>Кратковременный сбой связи</value></data>
+  <data name="HighTemperature" xml:space="preserve"><value>Высокая температура</value></data>
+  <data name="ScheduledRestart" xml:space="preserve"><value>Плановая перезагрузка</value></data>
+  <data name="PowerFailure" xml:space="preserve"><value>Ошибка питания</value></data>
 </root>

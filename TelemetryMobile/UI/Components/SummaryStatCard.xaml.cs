@@ -14,6 +14,9 @@ public partial class SummaryStatCard : ContentView
     private void UpdateState()
     {
         if (ValueLabel is not null)
+        {
             ValueLabel.SetDynamicResource(Label.TextColorProperty, State == StatusState.Unknown ? "ColorTextPrimary" : StatusResources.ColorKey(State));
+            CaptionLabel.SetDynamicResource(Label.TextColorProperty, State == StatusState.Unknown ? "ColorTextSecondary" : StatusResources.ColorKey(State));
+        }
     }
 }

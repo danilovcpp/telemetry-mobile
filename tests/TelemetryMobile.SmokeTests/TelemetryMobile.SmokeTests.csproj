@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+    <Compile Include="../../TelemetryMobile/Models/TelemetryDevice.cs" Link="Models/TelemetryDevice.cs" />
+    <Compile Include="../../TelemetryMobile/Services/MockTelemetryService.cs" Link="Services/MockTelemetryService.cs" />
+    <Compile Include="../../TelemetryMobile/PageModels/*.cs" Link="PageModels/%(Filename)%(Extension)" />
+    <Compile Include="../../TelemetryMobile/UI/Components/StatusState.cs" Link="UI/StatusState.cs" />
+  </ItemGroup>
+</Project>

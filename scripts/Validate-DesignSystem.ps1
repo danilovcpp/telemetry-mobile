@@ -3,6 +3,7 @@ $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $ProjectPath).Path
 $xamlNamespace = 'http://schemas.microsoft.com/winfx/2009/xaml'
 $keys = @{}
+$themeKeys = @{}
 $sourceFiles = @(Get-ChildItem -LiteralPath $root -Recurse -File | Where-Object {
     $_.Extension -eq '.xaml' -and $_.FullName -notmatch '[\\/](bin|obj)[\\/]'
 })
@@ -11,11 +12,19 @@ foreach ($file in $sourceFiles) {
     foreach ($element in $document.SelectNodes('//*')) {
         $key = $element.GetAttribute('Key', $xamlNamespace)
         if ($key) {
+            if ($file.DirectoryName -eq (Join-Path $root 'Resources/Styles/Themes')) {
+                if (-not $themeKeys.ContainsKey($file.Name)) { $themeKeys[$file.Name] = @() }
+                if ($key -in $themeKeys[$file.Name]) { throw "Duplicate theme resource '$key': $($file.FullName)" }
+                $themeKeys[$file.Name] += $key
+                if ($keys.ContainsKey($key) -and (Split-Path $keys[$key]) -eq $file.DirectoryName) { continue }
+            }
             if ($keys.ContainsKey($key)) { throw "Duplicate resource '$key': $($file.FullName), $($keys[$key])" }
             $keys[$key] = $file.FullName
         }
     }
 }
+if (-not $themeKeys.ContainsKey('DarkTheme.xaml') -or -not $themeKeys.ContainsKey('LightTheme.xaml')) { throw 'Both theme palettes are required.' }
+if (Compare-Object $themeKeys['DarkTheme.xaml'] $themeKeys['LightTheme.xaml']) { throw 'Theme resource keys must match.' }
 foreach ($file in $sourceFiles) {
     $text = Get-Content -LiteralPath $file.FullName -Raw
     foreach ($match in [regex]::Matches($text, '\{(?:StaticResource|DynamicResource)\s+([^},\s]+)')) {

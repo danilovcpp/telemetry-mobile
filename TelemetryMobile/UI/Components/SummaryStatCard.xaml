@@ -2,10 +2,10 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
  xmlns:c="clr-namespace:TelemetryMobile.UI.Components" x:Class="TelemetryMobile.UI.Components.SummaryStatCard" x:Name="Root" x:DataType="c:SummaryStatCard">
 
-    <Border Style="{StaticResource SummaryCard}">
+    <Border Style="{StaticResource SummaryCard}" Padding="{StaticResource Space8}">
         <VerticalStackLayout Spacing="{StaticResource Space4}">
-            <Label x:Name="ValueLabel" Text="{Binding Value, Source={x:Reference Root}}" Style="{StaticResource MetricValueLabelStyle}" />
-            <Label Text="{Binding Caption, Source={x:Reference Root}}" Style="{StaticResource BodySecondaryLabelStyle}" />
+            <Label x:Name="ValueLabel" Text="{Binding Value, Source={x:Reference Root}}" Style="{StaticResource MetricValueLabelStyle}" HorizontalTextAlignment="Center" />
+            <Label x:Name="CaptionLabel" Text="{Binding Caption, Source={x:Reference Root}}" Style="{StaticResource CaptionLabelStyle}" HorizontalTextAlignment="Center" />
         </VerticalStackLayout>
     </Border>
 </ContentView>

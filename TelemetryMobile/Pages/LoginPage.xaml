@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:c="clr-namespace:TelemetryMobile.UI.Components" xmlns:loc="clr-namespace:TelemetryMobile.Localization"
     xmlns:vm="clr-namespace:TelemetryMobile.PageModels" xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:theme="clr-namespace:TelemetryMobile.Theming"
     x:Class="TelemetryMobile.Pages.LoginPage" x:DataType="vm:LoginPageModel"
     Title="{loc:Translate Login}" Shell.NavBarIsVisible="False" SafeAreaEdges="All">
     <ContentPage.Resources>
@@ -13,19 +14,29 @@
         </Style>
     </ContentPage.Resources>
     <ContentPage.Behaviors>
-        <toolkit:StatusBarBehavior StatusBarColor="{DynamicResource ColorPageBackground}" StatusBarStyle="LightContent" />
+        <toolkit:StatusBarBehavior
+            StatusBarColor="{Binding PageBackgroundColor, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}"
+            StatusBarStyle="{Binding StatusBarStyle, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}" />
     </ContentPage.Behaviors>
     <Grid>
-        <Image x:Name="LoginDecoration" Source="background.png" Aspect="AspectFill" HeightRequest="{StaticResource DecorationHeight}" VerticalOptions="End"
+        <Image x:Name="LoginDecoration" Source="background.png" Aspect="AspectFill" HeightRequest="{StaticResource DecorationHeight}" VerticalOptions="End" Opacity="{AppThemeBinding Light=0.25, Dark=1}"
             InputTransparent="True" AutomationProperties.IsInAccessibleTree="False" />
         <ScrollView x:Name="LoginScroll" VerticalScrollBarVisibility="Never" SizeChanged="OnViewportSizeChanged">
             <Grid x:Name="ContentLayout" Padding="{StaticResource PagePadding}" MaximumWidthRequest="{StaticResource LoginMaxWidth}"
                 HorizontalOptions="Center" RowDefinitions="Auto,0.2*,Auto,Auto,Auto,1.8*" RowSpacing="{StaticResource SectionSpacing}">
-                <HorizontalStackLayout HorizontalOptions="End" Spacing="0">
-                    <Button Text="RU" Style="{StaticResource LanguageButtonStyle}" Command="{Binding ChangeLanguageCommand}" CommandParameter="ru" />
-                    <Button Text="EN" Style="{StaticResource LanguageButtonStyle}" Command="{Binding ChangeLanguageCommand}" CommandParameter="en" />
-                    <Button Text="DE" Style="{StaticResource LanguageButtonStyle}" Command="{Binding ChangeLanguageCommand}" CommandParameter="de" />
-                </HorizontalStackLayout>
+                <VerticalStackLayout HorizontalOptions="End" Spacing="0">
+                    <HorizontalStackLayout HorizontalOptions="End" Spacing="0">
+                        <Button Text="RU" Style="{StaticResource LanguageButtonStyle}" Command="{Binding ChangeLanguageCommand}" CommandParameter="ru" />
+                        <Button Text="EN" Style="{StaticResource LanguageButtonStyle}" Command="{Binding ChangeLanguageCommand}" CommandParameter="en" />
+                        <Button Text="DE" Style="{StaticResource LanguageButtonStyle}" Command="{Binding ChangeLanguageCommand}" CommandParameter="de" />
+                    </HorizontalStackLayout>
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="{StaticResource Space12}">
+                        <Label Text="{loc:Translate LightTheme}" Style="{StaticResource CaptionLabelStyle}" VerticalOptions="Center" />
+                        <Switch Grid.Column="1" IsToggled="{Binding IsLightTheme, Source={x:Static theme:ThemeManager.Instance}, Mode=TwoWay, x:DataType=theme:ThemeManager}"
+                            OnColor="{DynamicResource ColorAccentPrimary}" ThumbColor="{DynamicResource ColorTextOnAccent}"
+                            MinimumHeightRequest="{StaticResource TouchTarget}" SemanticProperties.Description="{loc:Translate LightTheme}" />
+                    </Grid>
+                </VerticalStackLayout>
                 <VerticalStackLayout Grid.Row="2" Spacing="{StaticResource Space16}">
                     <Image Source="logo.png" WidthRequest="{StaticResource LogoSize}" HeightRequest="{StaticResource LogoSize}" HorizontalOptions="Center" AutomationProperties.IsInAccessibleTree="False" />
                     <Label Text="{loc:Translate AppHeading}" Style="{StaticResource DisplayLabelStyle}" HorizontalTextAlignment="Center" SemanticProperties.HeadingLevel="Level1" />
@@ -49,7 +60,8 @@
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Row="4" Spacing="{StaticResource Space12}">
                     <Button Text="{loc:Translate SignIn}" Command="{Binding SignInCommand}" />
-                    <Label Text="{loc:Translate AuthUnavailable}" IsVisible="{Binding AuthUnavailable}" Style="{StaticResource BodySecondaryLabelStyle}" HorizontalTextAlignment="Center" />
+                    <Label Text="{loc:Translate DemoCredentials}" Style="{StaticResource CaptionLabelStyle}" HorizontalTextAlignment="Center" />
+                    <Label Text="{loc:Translate InvalidCredentials}" IsVisible="{Binding AuthUnavailable}" Style="{StaticResource BodySecondaryLabelStyle}" TextColor="{DynamicResource ColorStatusError}" HorizontalTextAlignment="Center" />
                 </VerticalStackLayout>
             </Grid>
         </ScrollView>
