@@ -1,13 +1,20 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 namespace TelemetryMobile.Models;
 
-public enum DeviceStatus { Online, Offline, Error }
-public enum EventSeverity { Information, Warning, Alarm }
+public sealed record DeviceListItem(int Id, string DeviceCode, string Name);
+public sealed record TelemetryDevice(int Id, string DeviceCode, string Name, int CustomerId,
+    DateTimeOffset? LastEventAtUtc, int? LastStatusCode);
+public sealed record TelemetryEvent(Guid Id, int StatusCode, DateTimeOffset OccurredAtUtc,
+    DateTimeOffset ReceivedAtUtc, JsonElement? Payload);
+public sealed record EventPage(IReadOnlyList<TelemetryEvent> Items, string? NextCursor, bool HasMore);
+public sealed record DeviceEvent(DeviceListItem Device, TelemetryEvent Event);
+public sealed record ApiProblem(string? Code, string? TraceId);
 
-public sealed record DeviceMetric(string NameKey, string Value, string Icon, string ColorKey, float[] Samples);
-
-public sealed record TelemetryDevice(string Id, string Name, string Address, string Icon,
-    DeviceStatus Status, string Model, string SoftwareVersion, string LastContact,
-    IReadOnlyList<DeviceMetric> Metrics);
-
-public sealed record TelemetryEvent(string DeviceId, string TitleKey, string Time,
-    EventSeverity Severity, bool IsRecovery = false);
+[JsonSourceGenerationOptions(PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase)]
+[JsonSerializable(typeof(List<DeviceListItem>))]
+[JsonSerializable(typeof(TelemetryDevice))]
+[JsonSerializable(typeof(EventPage))]
+[JsonSerializable(typeof(ApiProblem))]
+internal partial class MobileApiJsonContext : JsonSerializerContext;

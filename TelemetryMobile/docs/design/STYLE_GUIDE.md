@@ -4,7 +4,7 @@
 
 Premium Dark Monitoring Dashboard: почти чёрный синий фон, спокойные поверхности, тонкие границы, электрический синий акцент и бирюзовый логотип. Основа — предоставленные восемь изображений в `references/`. Карточки не используют тяжёлые тени или blur.
 
-Проект остаётся на .NET 10 MAUI и CommunityToolkit.Mvvm. Шаблонный менеджер проектов/задач, тестовые данные, SQLite и Syncfusion удалены. Реализованы Login, Devices, Device Details и Events. После демо-входа test/test открывается Shell с вкладками устройств и событий. MockTelemetryService содержит 16 устройств и 8 событий; поиск, фильтры, детали и события устройства используют общий набор данных. Настоящий backend авторизации пока не подключён; пароль не сохраняется. Statistics, Map и Profile не входят в текущую навигацию.
+Проект остаётся на .NET 10 MAUI и CommunityToolkit.Mvvm. Шаблонный менеджер проектов/задач, тестовые данные, SQLite и Syncfusion удалены. Реализованы Login, Devices, Device Details и Events. После ввода customerId (тестовые клиенты 1–10, пароль любой) открывается Shell с вкладками устройств и событий. TelemetryApiClient получает реальные устройства, карточки и курсорную историю с api.konstek.de. CustomerId сохраняется в Preferences и очищается при выходе; пароль не отправляется и не сохраняется. Серверной авторизации пока нет. Онлайн/офлайн, IP, вымышленные метрики и фильтры по неизвестной семантике кодов на рабочих экранах не отображаются. Statistics, Map и Profile не входят в текущую навигацию.
 
 ## Структура и порядок ресурсов
 
@@ -92,7 +92,7 @@ Pages/Development/             # исключается из Release
 | `StatusBadge` | `State`, `Text`. Состояния `Online`, `Offline`, `Warning`, `Error`, `Unknown`; текст передаёт вызывающая сторона, компонент ничего не переводит самостоятельно. |
 | `DeviceCard` | `Icon`, `Name`, `SecondaryText`, `StatusText`, `State`, `ShowNavigation`, `Command`, `CommandParameter`. При наличии команды используется настоящая Button для клавиатуры и accessibility. |
 | `SummaryStatCard` | `Value` (уже отформатированная строка), `Caption`, `State`; Unknown использует основной цвет текста. |
-| `MetricRow` | `Icon`, `Name`, `Value`, `Unit`, `Trend` (необязательный текст). Графики не рисует. Для графиков в деталях используется Sparkline (GraphicsView) с mock-выборкой. |
+| `MetricRow` | `Icon`, `Name`, `Value`, `Unit`, `Trend` (необязательный текст). Графики не рисует. Sparkline (GraphicsView) доступен для будущих графиков; текущий API не предоставляет фиксированные метрики. |
 | `EventListItem` | `Title`, `Description`, `Timestamp`, `StatusText`, `State`. Время и форматирование задаёт page model. |
 | `SectionHeader` | `Title`, `ActionText`, `ActionCommand`, `ActionParameter`. Без ActionText кнопка скрыта. |
 
@@ -124,12 +124,11 @@ Pages/Development/             # исключается из Release
 
 ```xml
 <c:DeviceCard Name="{Binding Name}" SecondaryText="{Binding Address}"
-              State="{Binding VisualState}" StatusText="{Binding LocalizedStatus}"
               Icon="server.png" ShowNavigation="True"
               Command="{Binding OpenCommand}" CommandParameter="{Binding .}" />
 ```
 
-Страницы используют DeviceItem и TelemetryDevice, а навигация передаёт стабильный deviceId. Демонстрационные адреса находятся в MockTelemetryService; при подключении backend замените источник данных.
+Страницы используют DeviceItem, DeviceListItem и TelemetryDevice, навигация передаёт числовой внутренний deviceId. Источник данных — ITelemetryApi / TelemetryApiClient; формат DTO соответствует docs/mobile-api.openapi.json. Список устройств не запрашивает карточки каждого устройства. Общая лента объединяет отдельные курсорные истории в DeviceEventFeed.
 
 ## Локализация
 
@@ -147,7 +146,7 @@ RU — neutral RESX, EN/DE — satellite resources. `loc:Translate` возвра
 
 ## Showcase и проверка
 
-Обычный запуск всегда открывает Login. Каталог не зарегистрирован в навигации. Включение только для разработки:
+Обычный запуск открывает Login, если customerId ещё не выбран; сохранённый customerId восстанавливает вкладки устройств и событий. Каталог не зарегистрирован в навигации. Включение только для разработки:
 
 ```powershell
 dotnet build TelemetryMobile/TelemetryMobile.csproj -f net10.0-android -c Debug -p:DesignSystemShowcase=true

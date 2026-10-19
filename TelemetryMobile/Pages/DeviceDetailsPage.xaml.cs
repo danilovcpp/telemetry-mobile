@@ -11,7 +11,19 @@ public partial class DeviceDetailsPage : ContentPage, IQueryAttributable
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        if (query.TryGetValue("deviceId", out var id) && id is string value) model.Load(value);
+        if (query.TryGetValue("deviceId", out var id) && id is int value) model.SetDevice(value);
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await model.RefreshAsync();
+    }
+
+    protected override void OnDisappearing()
+    {
+        model.CancelLoading();
+        base.OnDisappearing();
     }
 
     private async void OnBackClicked(object? sender, EventArgs e) => await Shell.Current.GoToAsync("..");

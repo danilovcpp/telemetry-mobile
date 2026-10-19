@@ -16,7 +16,13 @@ public static class MauiProgram
 #endif
         builder.Services.AddTransient<LoginPageModel>();
         builder.Services.AddTransient<LoginPage>();
-        builder.Services.AddSingleton<MockTelemetryService>();
+        builder.Services.AddSingleton<CustomerSession>();
+        builder.Services.AddSingleton(new HttpClient
+        {
+            BaseAddress = TelemetryApiClient.BaseAddress,
+            Timeout = TimeSpan.FromSeconds(20)
+        });
+        builder.Services.AddSingleton<ITelemetryApi, TelemetryApiClient>();
         builder.Services.AddSingleton<DemoNavigationService>();
         builder.Services.AddTransient<DevicesPageModel>();
         builder.Services.AddTransient<DevicesPage>();

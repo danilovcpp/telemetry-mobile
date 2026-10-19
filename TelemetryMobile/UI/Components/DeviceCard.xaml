@@ -9,7 +9,13 @@
             </Border>
             <Label Grid.Column="1" Text="{Binding Name, Source={x:Reference Root}}" Style="{StaticResource CardTitleLabelStyle}" />
             <Label Grid.Column="1" Grid.Row="1" Text="{Binding SecondaryText, Source={x:Reference Root}}" Style="{StaticResource BodySecondaryLabelStyle}" />
-            <c:StatusBadge x:Name="DeviceStatus" Grid.Column="1" Grid.Row="2" Text="{Binding StatusText, Source={x:Reference Root}}" State="{Binding State, Source={x:Reference Root}}" VerticalOptions="Center" />
+            <c:StatusBadge x:Name="DeviceStatus" Grid.Column="1" Grid.Row="2" Text="{Binding StatusText, Source={x:Reference Root}}" State="{Binding State, Source={x:Reference Root}}" VerticalOptions="Center">
+                <c:StatusBadge.Triggers>
+                    <DataTrigger TargetType="c:StatusBadge" Binding="{Binding StatusText, Source={x:Reference Root}}" Value="">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                </c:StatusBadge.Triggers>
+            </c:StatusBadge>
             <Image Grid.Column="3" Grid.RowSpan="3" Source="chevron.png" IsVisible="{Binding ShowNavigation, Source={x:Reference Root}}" WidthRequest="{StaticResource IconSizeSmall}" HeightRequest="{StaticResource IconSizeSmall}" AutomationProperties.IsInAccessibleTree="False"><Image.Behaviors><toolkit:IconTintColorBehavior TintColor="{Binding IconTintColor, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}" /></Image.Behaviors></Image>
             <Button Grid.ColumnSpan="4" Grid.RowSpan="3" Command="{Binding Command, Source={x:Reference Root}}" CommandParameter="{Binding CommandParameter, Source={x:Reference Root}}" IsVisible="{Binding IsInteractive, Source={x:Reference Root}}"
                 Style="{StaticResource CardActionButtonStyle}" SemanticProperties.Description="{Binding Name, Source={x:Reference Root}}" />

@@ -14,20 +14,22 @@ public partial class DevicesPage : ContentPage
         this.navigation = navigation;
     }
 
-    private void OnSummarySizeChanged(object? sender, EventArgs e)
+    protected override async void OnAppearing()
     {
-        var width = Math.Max(104, (SummaryScroll.Width - 16) / 3);
-        OnlineSummary.WidthRequest = OfflineSummary.WidthRequest = ErrorSummary.WidthRequest = width;
+        base.OnAppearing();
+        await ((DevicesPageModel)BindingContext).RefreshAsync();
+    }
+
+    protected override void OnDisappearing()
+    {
+        ((DevicesPageModel)BindingContext).CancelLoading();
+        base.OnDisappearing();
     }
 
     private async void OnMenuClicked(object? sender, EventArgs e)
     {
         var loc = LocalizationManager.Instance;
-        var model = (DevicesPageModel)BindingContext;
-        var options = model.Filters.Select(f => f.Caption).Concat(new[] { loc["LightTheme"], loc["SignOut"] }).ToArray();
-        var choice = await DisplayActionSheetAsync(loc["Filter"], loc["Cancel"], null, options);
-        var filter = model.Filters.FirstOrDefault(f => f.Caption == choice);
-        if (filter is not null) model.SelectFilterCommand.Execute(filter.Value);
+        var choice = await DisplayActionSheetAsync(loc["Menu"], loc["Cancel"], null, loc["LightTheme"], loc["SignOut"]);
         if (choice == loc["LightTheme"]) ThemeManager.Instance.IsLightTheme = !ThemeManager.Instance.IsLightTheme;
         if (choice == loc["SignOut"]) navigation.SignOut();
     }

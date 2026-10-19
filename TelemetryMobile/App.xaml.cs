@@ -17,7 +17,8 @@ public partial class App : Application
 #if DESIGN_SYSTEM_SHOWCASE
         return new Window(new Pages.Development.DesignSystemShowcasePage());
 #else
-        return new Window(services.GetRequiredService<LoginPage>());
+        return new Window(services.GetRequiredService<Services.CustomerSession>().CustomerId.HasValue
+            ? new AppShell(services) : services.GetRequiredService<LoginPage>());
 #endif
     }
 }

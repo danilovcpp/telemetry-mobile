@@ -17,29 +17,32 @@
                 BackgroundColor="{DynamicResource ColorTransparent}" Padding="{StaticResource IconPadding}" WidthRequest="{StaticResource TouchTarget}" HeightRequest="{StaticResource TouchTarget}">
                 <ImageButton.Behaviors><toolkit:IconTintColorBehavior TintColor="{Binding IconTintColor, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}" /></ImageButton.Behaviors>
             </ImageButton>
-            <ImageButton Grid.Column="2" Source="filter.png" Clicked="OnMenuClicked" SemanticProperties.Description="{loc:Translate Filter}"
+            <ImageButton Grid.Column="2" Source="filter.png" Clicked="OnMenuClicked" SemanticProperties.Description="{loc:Translate Menu}"
                 BackgroundColor="{DynamicResource ColorTransparent}" Padding="{StaticResource IconPadding}" WidthRequest="{StaticResource TouchTarget}" HeightRequest="{StaticResource TouchTarget}">
                 <ImageButton.Behaviors><toolkit:IconTintColorBehavior TintColor="{Binding IconTintColor, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}" /></ImageButton.Behaviors>
             </ImageButton>
         </Grid>
         <c:AppTextField x:Name="SearchField" Grid.Row="1" IsVisible="{Binding IsSearchVisible}" Text="{Binding SearchText}" Placeholder="{loc:Translate SearchDevices}" LeadingIcon="search.png" />
-        <c:FilterBar Grid.Row="2" Items="{Binding Filters}" />
-        <ScrollView x:Name="SummaryScroll" Grid.Row="3" Orientation="Horizontal" HorizontalScrollBarVisibility="Never" SizeChanged="OnSummarySizeChanged">
-            <HorizontalStackLayout Spacing="{StaticResource Space8}">
-                <c:SummaryStatCard x:Name="OnlineSummary" WidthRequest="104" Value="{Binding OnlineCount}" Caption="{loc:Translate Online}" State="Online" />
-                <c:SummaryStatCard x:Name="OfflineSummary" WidthRequest="104" Value="{Binding OfflineCount}" Caption="{loc:Translate Offline}" State="Offline" />
-                <c:SummaryStatCard x:Name="ErrorSummary" WidthRequest="104" Value="{Binding ErrorCount}" Caption="{loc:Translate Error}" State="Error" />
-            </HorizontalStackLayout>
-        </ScrollView>
-        <CollectionView Grid.Row="4" ItemsSource="{Binding Devices}" SelectionMode="None" VerticalScrollBarVisibility="Never">
+        <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="{StaticResource Space12}">
+            <c:SummaryStatCard Value="{Binding DeviceCount}" Caption="{loc:Translate Devices}" State="Unknown" />
+            <c:SummaryStatCard Grid.Column="1" Value="{Binding CustomerId}" Caption="{loc:Translate CustomerId}" State="Unknown" />
+        </Grid>
+        <VerticalStackLayout Grid.Row="3" Spacing="{StaticResource Space8}">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="{DynamicResource ColorAccentPrimary}" />
+            <Label Text="{Binding ErrorMessage}" IsVisible="{Binding HasError}" TextColor="{DynamicResource ColorStatusError}" />
+            <Button Text="{loc:Translate Refresh}" Style="{StaticResource TextButtonStyle}" Command="{Binding RefreshCommand}" />
+        </VerticalStackLayout>
+        <RefreshView Grid.Row="4" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="{DynamicResource ColorAccentPrimary}">
+        <CollectionView ItemsSource="{Binding Devices}" SelectionMode="None" VerticalScrollBarVisibility="Never">
             <CollectionView.ItemsLayout><LinearItemsLayout Orientation="Vertical" ItemSpacing="12" /></CollectionView.ItemsLayout>
-            <CollectionView.EmptyView><Label Text="{loc:Translate NoDevices}" Style="{StaticResource BodySecondaryLabelStyle}" Margin="0,24" HorizontalTextAlignment="Center" /></CollectionView.EmptyView>
+            <CollectionView.EmptyView><Label IsVisible="{Binding ShowEmpty}" Text="{loc:Translate NoDevices}" Style="{StaticResource BodySecondaryLabelStyle}" Margin="0,24" HorizontalTextAlignment="Center" /></CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="vm:DeviceItem">
-                    <c:DeviceCard Icon="{Binding Icon}" Name="{Binding Name}" SecondaryText="{Binding Address}" State="{Binding State}"
-                        StatusText="{Binding StatusText}" ShowNavigation="True" Command="{Binding OpenCommand}" />
+                    <c:DeviceCard Icon="{Binding Icon}" Name="{Binding Name}" SecondaryText="{Binding Address}"
+                         ShowNavigation="True" Command="{Binding OpenCommand}" />
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        </RefreshView>
     </Grid>
 </ContentPage>

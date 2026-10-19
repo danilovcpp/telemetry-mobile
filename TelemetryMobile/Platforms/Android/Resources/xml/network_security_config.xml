@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false" />
+    <!-- This MVP backend is served over HTTP. Scope the exception to this host. -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">api.konstek.de</domain>
+    </domain-config>
+</network-security-config>

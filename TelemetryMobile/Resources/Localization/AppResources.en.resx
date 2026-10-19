@@ -10,7 +10,7 @@ Your infrastructure at your fingertips.</value></data>
   <data name="CustomerId" xml:space="preserve"><value>Customer ID</value></data>
   <data name="Password" xml:space="preserve"><value>Password</value></data>
   <data name="SignIn" xml:space="preserve"><value>Sign in</value></data>
-  <data name="RequiredCustomer" xml:space="preserve"><value>Enter your customer ID.</value></data>
+  <data name="RequiredCustomer" xml:space="preserve"><value>Enter a positive numeric customer ID.</value></data>
   <data name="RequiredPassword" xml:space="preserve"><value>Enter your password.</value></data>
   <data name="AuthUnavailable" xml:space="preserve"><value>The authentication service is not connected yet.</value></data>
   <data name="Online" xml:space="preserve"><value>Online</value></data>
@@ -41,15 +41,15 @@ Your infrastructure at your fingertips.</value></data>
   <data name="LightTheme" xml:space="preserve"><value>Light theme</value></data>
   <data name="Devices" xml:space="preserve"><value>Devices</value></data>
   <data name="Search" xml:space="preserve"><value>Search</value></data>
-  <data name="SearchDevices" xml:space="preserve"><value>Name or IP address</value></data>
+  <data name="SearchDevices" xml:space="preserve"><value>Device name or code</value></data>
   <data name="Menu" xml:space="preserve"><value>Menu</value></data>
   <data name="Cancel" xml:space="preserve"><value>Cancel</value></data>
   <data name="SignOut" xml:space="preserve"><value>Sign out</value></data>
   <data name="Filter" xml:space="preserve"><value>Filter</value></data>
   <data name="Back" xml:space="preserve"><value>Back</value></data>
-  <data name="DemoCredentials" xml:space="preserve"><value>Demo sign-in: test / test</value></data>
+  <data name="DemoCredentials" xml:space="preserve"><value>Demo: customer ID 1–10, any password.</value></data>
   <data name="InvalidCredentials" xml:space="preserve"><value>Invalid credentials. Use test / test for the demo.</value></data>
-  <data name="NoDevices" xml:space="preserve"><value>No devices found. Try another search or filter.</value></data>
+  <data name="NoDevices" xml:space="preserve"><value>No devices found.</value></data>
   <data name="NoEvents" xml:space="preserve"><value>No events to display.</value></data>
   <data name="Information" xml:space="preserve"><value>Information</value></data>
   <data name="Alarm" xml:space="preserve"><value>Alarms</value></data>
@@ -74,4 +74,16 @@ Your infrastructure at your fingertips.</value></data>
   <data name="HighTemperature" xml:space="preserve"><value>High temperature</value></data>
   <data name="ScheduledRestart" xml:space="preserve"><value>Scheduled restart</value></data>
   <data name="PowerFailure" xml:space="preserve"><value>Power failure</value></data>
+  <data name="LastStatus" xml:space="preserve"><value>Last known status</value></data>
+  <data name="RetryAfter" xml:space="preserve"><value>Server busy. Try again in {0} seconds.</value></data>
+  <data name="InvalidResponse" xml:space="preserve"><value>Cannot read the server response. Try again.</value></data>
+  <data name="Refresh" xml:space="preserve"><value>Refresh</value></data>
+  <data name="ServerError" xml:space="preserve"><value>The server is temporarily unavailable. Try again.</value></data>
+  <data name="LoadMore" xml:space="preserve"><value>Load more</value></data>
+  <data name="CustomerNotFound" xml:space="preserve"><value>Customer not found. Check the customer ID.</value></data>
+  <data name="LastEvent" xml:space="preserve"><value>Last event</value></data>
+  <data name="StatusCode" xml:space="preserve"><value>Status {0}</value></data>
+  <data name="DeviceNotFound" xml:space="preserve"><value>Device not found. Refresh the device list.</value></data>
+  <data name="DeviceCode" xml:space="preserve"><value>Device code</value></data>
+  <data name="ConnectionError" xml:space="preserve"><value>Cannot reach the server. Check your connection and try again.</value></data>
 </root>

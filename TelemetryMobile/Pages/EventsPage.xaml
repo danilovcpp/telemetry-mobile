@@ -9,30 +9,34 @@
         <toolkit:StatusBarBehavior StatusBarColor="{Binding PageBackgroundColor, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}"
             StatusBarStyle="{Binding StatusBarStyle, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}" />
     </ContentPage.Behaviors>
-    <Grid RowDefinitions="Auto,Auto,Auto,*" RowSpacing="{StaticResource Space20}" Padding="{StaticResource PagePadding}"
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" RowSpacing="{StaticResource Space20}" Padding="{StaticResource PagePadding}"
         MaximumWidthRequest="{StaticResource ContentMaxWidth}" HorizontalOptions="Center">
         <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="{StaticResource Space8}">
             <Button Text="‹" IsVisible="{Binding IsDeviceScope}" Style="{StaticResource IconButtonStyle}" Clicked="OnBackClicked" SemanticProperties.Description="{loc:Translate Back}" />
             <Label Grid.Column="1" Text="{loc:Translate Events}" Style="{StaticResource PageTitleLabelStyle}" VerticalOptions="Center" SemanticProperties.HeadingLevel="Level1" />
-            <ImageButton Grid.Column="2" Source="filter.png" Clicked="OnFilterClicked" SemanticProperties.Description="{loc:Translate Filter}"
-                BackgroundColor="{DynamicResource ColorTransparent}" Padding="{StaticResource IconPadding}" WidthRequest="{StaticResource TouchTarget}" HeightRequest="{StaticResource TouchTarget}">
-                <ImageButton.Behaviors><toolkit:IconTintColorBehavior TintColor="{Binding IconTintColor, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}" /></ImageButton.Behaviors>
-            </ImageButton>
+            <Button Grid.Column="2" Text="{loc:Translate Refresh}" Command="{Binding RefreshCommand}" Style="{StaticResource TextButtonStyle}" />
         </Grid>
         <Label Grid.Row="1" Text="{Binding DeviceName}" IsVisible="{Binding IsDeviceScope}" Style="{StaticResource BodySecondaryLabelStyle}" />
-        <c:FilterBar Grid.Row="2" Items="{Binding Filters}" />
+        <VerticalStackLayout Grid.Row="2" Spacing="{StaticResource Space8}">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="{DynamicResource ColorAccentPrimary}" />
+            <Label Text="{Binding ErrorMessage}" IsVisible="{Binding HasError}" TextColor="{DynamicResource ColorStatusError}" />
+        </VerticalStackLayout>
         <Border Grid.Row="3" Style="{StaticResource StandardCard}" Padding="0">
+            <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="{DynamicResource ColorAccentPrimary}">
             <CollectionView ItemsSource="{Binding Events}" SelectionMode="None" VerticalScrollBarVisibility="Never">
-                <CollectionView.EmptyView><Label Text="{loc:Translate NoEvents}" Style="{StaticResource BodySecondaryLabelStyle}" Margin="24" HorizontalTextAlignment="Center" /></CollectionView.EmptyView>
+                <CollectionView.EmptyView><Label IsVisible="{Binding ShowEmpty}" Text="{loc:Translate NoEvents}" Style="{StaticResource BodySecondaryLabelStyle}" Margin="24" HorizontalTextAlignment="Center" /></CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="vm:EventItem">
-                        <Grid Padding="16,0">
-                            <c:EventListItem Title="{Binding Title}" Description="{Binding Description}" Timestamp="{Binding Timestamp}" State="{Binding State}" StatusText="{Binding StatusText}" />
-                            <Button Style="{StaticResource CardActionButtonStyle}" Command="{Binding OpenCommand}" SemanticProperties.Description="{Binding Description}" />
+                        <Grid Padding="16,0" RowDefinitions="Auto,Auto">
+                            <c:EventListItem Title="{Binding Title}" Description="{Binding Description}" Timestamp="{Binding Timestamp}" State="{Binding State}" StatusText="{Binding Title}" />
+                            <Label Grid.Row="1" Text="{Binding Payload}" IsVisible="{Binding HasPayload}" Style="{StaticResource CaptionLabelStyle}" Margin="0,0,0,16" />
+                            <Button Grid.RowSpan="2" Style="{StaticResource CardActionButtonStyle}" Command="{Binding OpenCommand}" SemanticProperties.Description="{Binding Description}" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            </RefreshView>
         </Border>
+        <c:AppButton Grid.Row="4" Text="{loc:Translate LoadMore}" BusyText="{loc:Translate Loading}" IsBusy="{Binding IsBusy}" Command="{Binding LoadMoreCommand}" IsVisible="{Binding HasMore}" />
     </Grid>
 </ContentPage>

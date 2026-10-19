@@ -5,23 +5,40 @@ using TelemetryMobile.Services;
 
 namespace TelemetryMobile.PageModels;
 
-public partial class DeviceDetailsPageModel(MockTelemetryService data, DemoNavigationService navigation) : ObservableObject
+public partial class DeviceDetailsPageModel(ITelemetryApi api, CustomerSession session, DemoNavigationService navigation) : RemotePageModel
 {
+    private int deviceId;
     [ObservableProperty] private DeviceItem? device;
-    [ObservableProperty] private IReadOnlyList<MetricItem> metrics = [];
     [ObservableProperty] private IReadOnlyList<EventItem> recentEvents = [];
-    public string LastContact => Device is null ? string.Empty : $"{LocalizationManager.Instance["Today"]}, {Device.Device.LastContact}";
-    public bool HasMetrics => Metrics.Count > 0;
+    [ObservableProperty] private string lastContact = string.Empty;
+    [ObservableProperty] private string lastStatus = string.Empty;
+    public void SetDevice(int id) => deviceId = id;
 
-    public void Load(string id)
+    [RelayCommand]
+    public Task RefreshAsync() => RunAsync(async cancellationToken =>
     {
-        var device = data.Devices.First(d => d.Id == id);
-        Device = new DeviceItem(device, navigation);
-        Metrics = device.Metrics.Select(m => new MetricItem(m)).ToArray();
-        RecentEvents = data.Events.Where(e => e.DeviceId == id).Take(1).Select(e => new EventItem(e, device, navigation)).ToArray();
-        OnPropertyChanged(nameof(LastContact));
-        OnPropertyChanged(nameof(HasMetrics));
-    }
+        if (deviceId <= 0 || session.CustomerId is not { } customerId) return;
+        try
+        {
+            var details = await api.GetDeviceAsync(deviceId, cancellationToken);
+            if (details.CustomerId != customerId)
+            {
+                await navigation.CloseDeviceAsync();
+                return;
+            }
+            var device = new Models.DeviceListItem(details.Id, details.DeviceCode, details.Name);
+            Device = new DeviceItem(device, navigation);
+            LastContact = details.LastEventAtUtc?.ToLocalTime().ToString("g") ?? LocalizationManager.Instance["NoEvents"];
+            LastStatus = details.LastStatusCode is { } status
+                ? string.Format(LocalizationManager.Instance["StatusCode"], status) : LocalizationManager.Instance["NoEvents"];
+            var page = await api.GetEventsAsync(deviceId, limit: 3, cancellationToken: cancellationToken);
+            RecentEvents = page.Items.Select(e => new EventItem(e, device, navigation)).ToArray();
+        }
+        catch (TelemetryApiException error) when (error.Code == "device.not_found")
+        {
+            await navigation.CloseDeviceAsync();
+        }
+    });
 
     [RelayCommand] private Task AllEvents() => Device is null ? Task.CompletedTask : navigation.OpenDeviceEventsAsync(Device.Device.Id);
 }

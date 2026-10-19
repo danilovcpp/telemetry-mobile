@@ -1,6 +1,6 @@
 namespace TelemetryMobile.Services;
 
-public sealed class DemoNavigationService(IServiceProvider services)
+public sealed class DemoNavigationService(IServiceProvider services, CustomerSession session)
 {
     public void SignIn()
     {
@@ -10,12 +10,15 @@ public sealed class DemoNavigationService(IServiceProvider services)
 
     public void SignOut()
     {
+        session.SignOut();
         Application.Current!.Windows[0].Page = services.GetRequiredService<LoginPage>();
     }
 
-    public Task OpenDeviceAsync(string id) => Shell.Current.GoToAsync(nameof(DeviceDetailsPage),
+    public Task CloseDeviceAsync() => Shell.Current.GoToAsync("..");
+
+    public Task OpenDeviceAsync(int id) => Shell.Current.GoToAsync(nameof(DeviceDetailsPage),
         new Dictionary<string, object> { ["deviceId"] = id });
 
-    public Task OpenDeviceEventsAsync(string id) => Shell.Current.GoToAsync("device-events",
+    public Task OpenDeviceEventsAsync(int id) => Shell.Current.GoToAsync("device-events",
         new Dictionary<string, object> { ["deviceId"] = id });
 }

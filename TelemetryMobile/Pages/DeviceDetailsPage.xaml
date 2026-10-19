@@ -9,71 +9,51 @@
         <toolkit:StatusBarBehavior StatusBarColor="{Binding PageBackgroundColor, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}"
             StatusBarStyle="{Binding StatusBarStyle, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}" />
     </ContentPage.Behaviors>
+    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="{DynamicResource ColorAccentPrimary}">
     <ScrollView VerticalScrollBarVisibility="Never">
         <VerticalStackLayout Padding="{StaticResource PagePadding}" Spacing="{StaticResource SectionSpacing}"
             MaximumWidthRequest="{StaticResource ContentMaxWidth}" HorizontalOptions="Fill">
-            <Grid ColumnDefinitions="*,Auto">
-                <Button Text="‹" Style="{StaticResource IconButtonStyle}" Clicked="OnBackClicked" HorizontalOptions="Start" SemanticProperties.Description="{loc:Translate Back}" />
-                <Button Grid.Column="1" Text="⋮" Style="{StaticResource IconButtonStyle}" Clicked="OnMenuClicked" SemanticProperties.Description="{loc:Translate Menu}" />
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <Button Text="‹" Style="{StaticResource IconButtonStyle}" Clicked="OnBackClicked" SemanticProperties.Description="{loc:Translate Back}" />
+                <Button Grid.Column="1" Text="{loc:Translate Refresh}" Command="{Binding RefreshCommand}" Style="{StaticResource TextButtonStyle}" />
+                <Button Grid.Column="2" Text="⋮" Style="{StaticResource IconButtonStyle}" Clicked="OnMenuClicked" SemanticProperties.Description="{loc:Translate Menu}" />
             </Grid>
-            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="{StaticResource Space20}" RowSpacing="{StaticResource Space8}">
-                <Border Grid.RowSpan="3" BackgroundColor="{DynamicResource ColorSurfaceElevated}" StrokeThickness="0" StrokeShape="{StaticResource ShapeExtraLarge}" Padding="20" VerticalOptions="Start">
-                    <Image Source="{Binding Device.Icon}" WidthRequest="48" HeightRequest="64" AutomationProperties.IsInAccessibleTree="False">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="{DynamicResource ColorAccentPrimary}" />
+            <Label Text="{Binding ErrorMessage}" IsVisible="{Binding HasError}" TextColor="{DynamicResource ColorStatusError}" />
+            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="{StaticResource Space20}" RowSpacing="{StaticResource Space8}">
+                <Border Grid.RowSpan="2" BackgroundColor="{DynamicResource ColorSurfaceElevated}" StrokeThickness="0" StrokeShape="{StaticResource ShapeExtraLarge}" Padding="20" VerticalOptions="Start">
+                    <Image Source="sensor.png" WidthRequest="48" HeightRequest="64" AutomationProperties.IsInAccessibleTree="False">
                         <Image.Behaviors><toolkit:IconTintColorBehavior TintColor="{Binding IconTintColor, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}" /></Image.Behaviors>
                     </Image>
                 </Border>
                 <Label Grid.Column="1" Text="{Binding Device.Name}" Style="{StaticResource SectionTitleLabelStyle}" SemanticProperties.HeadingLevel="Level1" />
                 <Label Grid.Column="1" Grid.Row="1" Text="{Binding Device.Address}" Style="{StaticResource BodySecondaryLabelStyle}" />
-                <c:StatusBadge Grid.Column="1" Grid.Row="2" Text="{Binding Device.StatusText}" State="{Binding Device.State}" />
             </Grid>
             <Border Style="{StaticResource StandardCard}">
-                <Grid ColumnDefinitions="*,1.2*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="{StaticResource Space12}" RowSpacing="{StaticResource Space16}">
-                    <Label Text="{loc:Translate IpAddress}" Style="{StaticResource BodySecondaryLabelStyle}" />
+                <Grid ColumnDefinitions="*,1.2*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="{StaticResource Space12}" RowSpacing="{StaticResource Space16}">
+                    <Label Text="{loc:Translate DeviceCode}" Style="{StaticResource BodySecondaryLabelStyle}" />
                     <Label Grid.Column="1" Text="{Binding Device.Address}" HorizontalTextAlignment="End" />
-                    <Label Grid.Row="1" Text="{loc:Translate LastContact}" Style="{StaticResource BodySecondaryLabelStyle}" />
+                    <Label Grid.Row="1" Text="{loc:Translate LastEvent}" Style="{StaticResource BodySecondaryLabelStyle}" />
                     <Label Grid.Row="1" Grid.Column="1" Text="{Binding LastContact}" HorizontalTextAlignment="End" />
-                    <Label Grid.Row="2" Text="{loc:Translate SoftwareVersion}" Style="{StaticResource BodySecondaryLabelStyle}" />
-                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding Device.Device.SoftwareVersion}" HorizontalTextAlignment="End" />
-                    <Label Grid.Row="3" Text="{loc:Translate Model}" Style="{StaticResource BodySecondaryLabelStyle}" />
-                    <Label Grid.Row="3" Grid.Column="1" Text="{Binding Device.Device.Model}" HorizontalTextAlignment="End" LineBreakMode="WordWrap" />
+                    <Label Grid.Row="2" Text="{loc:Translate LastStatus}" Style="{StaticResource BodySecondaryLabelStyle}" />
+                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding LastStatus}" HorizontalTextAlignment="End" />
                 </Grid>
             </Border>
-            <c:SectionHeader Title="{loc:Translate Metrics}" />
-            <Border Style="{StaticResource StandardCard}" Padding="16,0" IsVisible="{Binding HasMetrics}">
-                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Metrics}" Spacing="0">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate x:DataType="vm:MetricItem">
-                            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*,0.65*" ColumnSpacing="{StaticResource Space12}" Padding="0,16,0,0">
-                                <Border BackgroundColor="{DynamicResource ColorSurfaceElevated}" StrokeThickness="0" StrokeShape="{StaticResource ShapePill}" Padding="12" VerticalOptions="Center">
-                                    <Image Source="{Binding Icon}" WidthRequest="24" HeightRequest="24" AutomationProperties.IsInAccessibleTree="False">
-                                        <Image.Behaviors><toolkit:IconTintColorBehavior TintColor="{Binding IconTintColor, Source={x:Static theme:ThemeManager.Instance}, x:DataType=theme:ThemeManager}" /></Image.Behaviors>
-                                    </Image>
-                                </Border>
-                                <VerticalStackLayout Grid.Column="1" Spacing="{StaticResource Space4}" VerticalOptions="Center">
-                                    <Label Text="{Binding Name}" Style="{StaticResource BodySecondaryLabelStyle}" />
-                                    <Label Text="{Binding Value}" Style="{StaticResource CardTitleLabelStyle}" />
-                                </VerticalStackLayout>
-                                <c:Sparkline Grid.Column="2" Samples="{Binding Samples}" ColorKey="{Binding ColorKey}" HeightRequest="48" VerticalOptions="Center" />
-                                <BoxView Grid.Row="1" Grid.ColumnSpan="3" Color="{DynamicResource ColorBorderSubtle}" HeightRequest="1" Margin="0,16,0,0" />
-                            </Grid>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </VerticalStackLayout>
-            </Border>
-            <Label Text="{loc:Translate MetricsUnavailable}" Style="{StaticResource BodySecondaryLabelStyle}">
-                <Label.Triggers><DataTrigger TargetType="Label" Binding="{Binding HasMetrics}" Value="True"><Setter Property="IsVisible" Value="False" /></DataTrigger></Label.Triggers>
-            </Label>
             <c:SectionHeader Title="{loc:Translate Events}" ActionText="{loc:Translate All}" ActionCommand="{Binding AllEventsCommand}" />
             <Border Style="{StaticResource StandardCard}" Padding="16,0">
                 <VerticalStackLayout BindableLayout.ItemsSource="{Binding RecentEvents}">
-                    <BindableLayout.EmptyView><Label Text="{loc:Translate NoEvents}" Style="{StaticResource BodySecondaryLabelStyle}" Margin="0,16" /></BindableLayout.EmptyView>
+                    <BindableLayout.EmptyView><Label Text="{loc:Translate NoEvents}" IsVisible="{Binding ShowEmpty}" Style="{StaticResource BodySecondaryLabelStyle}" Margin="0,16" /></BindableLayout.EmptyView>
                     <BindableLayout.ItemTemplate>
                         <DataTemplate x:DataType="vm:EventItem">
-                            <c:EventListItem Title="{Binding Title}" Timestamp="{Binding Timestamp}" State="{Binding State}" StatusText="{Binding StatusText}" />
+                            <VerticalStackLayout>
+                                <c:EventListItem Title="{Binding Title}" Timestamp="{Binding Timestamp}" State="{Binding State}" StatusText="{Binding Title}" />
+                                <Label Text="{Binding Payload}" IsVisible="{Binding HasPayload}" Style="{StaticResource CaptionLabelStyle}" Margin="0,0,0,16" />
+                            </VerticalStackLayout>
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
                 </VerticalStackLayout>
             </Border>
         </VerticalStackLayout>
     </ScrollView>
+    </RefreshView>
 </ContentPage>

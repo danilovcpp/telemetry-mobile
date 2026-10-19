@@ -8,7 +8,9 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
     <Compile Include="../../TelemetryMobile/Models/TelemetryDevice.cs" Link="Models/TelemetryDevice.cs" />
-    <Compile Include="../../TelemetryMobile/Services/MockTelemetryService.cs" Link="Services/MockTelemetryService.cs" />
+    <Compile Include="../../TelemetryMobile/Services/CustomerSession.cs" Link="Services/CustomerSession.cs" />
+    <Compile Include="../../TelemetryMobile/Services/TelemetryApiClient.cs" Link="Services/TelemetryApiClient.cs" />
+    <Compile Include="../../TelemetryMobile/Services/DeviceEventFeed.cs" Link="Services/DeviceEventFeed.cs" />
     <Compile Include="../../TelemetryMobile/PageModels/*.cs" Link="PageModels/%(Filename)%(Extension)" />
     <Compile Include="../../TelemetryMobile/UI/Components/StatusState.cs" Link="UI/StatusState.cs" />
   </ItemGroup>

@@ -43,25 +43,19 @@
                     <Label Text="{loc:Translate AppSubtitle}" Style="{StaticResource BodySecondaryLabelStyle}" HorizontalTextAlignment="Center" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Row="3" Spacing="{StaticResource InputSpacing}" Margin="0,16,0,0">
-                    <c:AppTextField x:Name="CustomerField" Text="{Binding CustomerId}" Placeholder="{loc:Translate CustomerId}" LeadingIcon="person.png" Completed="OnCustomerCompleted">
+                    <c:AppTextField x:Name="CustomerField" Text="{Binding CustomerId}" Placeholder="{loc:Translate CustomerId}" Keyboard="Numeric" LeadingIcon="person.png" Completed="OnCustomerCompleted">
                         <c:AppTextField.Triggers>
                             <DataTrigger TargetType="c:AppTextField" Binding="{Binding CustomerIdInvalid}" Value="True">
                                 <Setter Property="ErrorText" Value="{loc:Translate RequiredCustomer}" />
                             </DataTrigger>
                         </c:AppTextField.Triggers>
                     </c:AppTextField>
-                    <c:AppTextField x:Name="PasswordField" Text="{Binding Password}" Placeholder="{loc:Translate Password}" LeadingIcon="lock.png" IsPassword="True" ReturnType="Go" Completed="OnPasswordCompleted">
-                        <c:AppTextField.Triggers>
-                            <DataTrigger TargetType="c:AppTextField" Binding="{Binding PasswordInvalid}" Value="True">
-                                <Setter Property="ErrorText" Value="{loc:Translate RequiredPassword}" />
-                            </DataTrigger>
-                        </c:AppTextField.Triggers>
-                    </c:AppTextField>
+                    <c:AppTextField x:Name="PasswordField" Text="{Binding Password}" Placeholder="{loc:Translate Password}" LeadingIcon="lock.png" IsPassword="True" ReturnType="Go" Completed="OnPasswordCompleted" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Grid.Row="4" Spacing="{StaticResource Space12}">
-                    <Button Text="{loc:Translate SignIn}" Command="{Binding SignInCommand}" />
+                    <c:AppButton Text="{loc:Translate SignIn}" BusyText="{loc:Translate Loading}" IsBusy="{Binding IsBusy}" Command="{Binding SignInCommand}" />
                     <Label Text="{loc:Translate DemoCredentials}" Style="{StaticResource CaptionLabelStyle}" HorizontalTextAlignment="Center" />
-                    <Label Text="{loc:Translate InvalidCredentials}" IsVisible="{Binding AuthUnavailable}" Style="{StaticResource BodySecondaryLabelStyle}" TextColor="{DynamicResource ColorStatusError}" HorizontalTextAlignment="Center" />
+                    <Label Text="{Binding ErrorMessage}" IsVisible="{Binding HasError}" Style="{StaticResource BodySecondaryLabelStyle}" TextColor="{DynamicResource ColorStatusError}" HorizontalTextAlignment="Center" />
                 </VerticalStackLayout>
             </Grid>
         </ScrollView>

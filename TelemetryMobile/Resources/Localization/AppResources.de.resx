@@ -10,7 +10,7 @@ Ihre Infrastruktur immer griffbereit.</value></data>
   <data name="CustomerId" xml:space="preserve"><value>Kunden-ID</value></data>
   <data name="Password" xml:space="preserve"><value>Passwort</value></data>
   <data name="SignIn" xml:space="preserve"><value>Anmelden</value></data>
-  <data name="RequiredCustomer" xml:space="preserve"><value>Geben Sie Ihre Kunden-ID ein.</value></data>
+  <data name="RequiredCustomer" xml:space="preserve"><value>Geben Sie eine positive numerische Kunden-ID ein.</value></data>
   <data name="RequiredPassword" xml:space="preserve"><value>Geben Sie Ihr Passwort ein.</value></data>
   <data name="AuthUnavailable" xml:space="preserve"><value>Der Authentifizierungsdienst ist noch nicht verbunden.</value></data>
   <data name="Online" xml:space="preserve"><value>Online</value></data>
@@ -41,15 +41,15 @@ Ihre Infrastruktur immer griffbereit.</value></data>
   <data name="LightTheme" xml:space="preserve"><value>Helles Design</value></data>
   <data name="Devices" xml:space="preserve"><value>Geräte</value></data>
   <data name="Search" xml:space="preserve"><value>Suchen</value></data>
-  <data name="SearchDevices" xml:space="preserve"><value>Name oder IP-Adresse</value></data>
+  <data name="SearchDevices" xml:space="preserve"><value>Gerätename oder Gerätecode</value></data>
   <data name="Menu" xml:space="preserve"><value>Menü</value></data>
   <data name="Cancel" xml:space="preserve"><value>Abbrechen</value></data>
   <data name="SignOut" xml:space="preserve"><value>Abmelden</value></data>
   <data name="Filter" xml:space="preserve"><value>Filter</value></data>
   <data name="Back" xml:space="preserve"><value>Zurück</value></data>
-  <data name="DemoCredentials" xml:space="preserve"><value>Demo-Anmeldung: test / test</value></data>
+  <data name="DemoCredentials" xml:space="preserve"><value>Demo: Kunden-ID 1–10, beliebiges Passwort.</value></data>
   <data name="InvalidCredentials" xml:space="preserve"><value>Ungültige Anmeldedaten. Für die Demo: test / test.</value></data>
-  <data name="NoDevices" xml:space="preserve"><value>Keine Geräte gefunden. Suche oder Filter ändern.</value></data>
+  <data name="NoDevices" xml:space="preserve"><value>Keine Geräte gefunden.</value></data>
   <data name="NoEvents" xml:space="preserve"><value>Keine Ereignisse vorhanden.</value></data>
   <data name="Information" xml:space="preserve"><value>Information</value></data>
   <data name="Alarm" xml:space="preserve"><value>Alarme</value></data>
@@ -74,4 +74,16 @@ Ihre Infrastruktur immer griffbereit.</value></data>
   <data name="HighTemperature" xml:space="preserve"><value>Hohe Temperatur</value></data>
   <data name="ScheduledRestart" xml:space="preserve"><value>Geplanter Neustart</value></data>
   <data name="PowerFailure" xml:space="preserve"><value>Stromversorgungsfehler</value></data>
+  <data name="LastStatus" xml:space="preserve"><value>Letzter bekannter Status</value></data>
+  <data name="RetryAfter" xml:space="preserve"><value>Server ausgelastet. Versuchen Sie es in {0} Sekunden erneut.</value></data>
+  <data name="InvalidResponse" xml:space="preserve"><value>Die Serverantwort konnte nicht gelesen werden. Versuchen Sie es erneut.</value></data>
+  <data name="Refresh" xml:space="preserve"><value>Aktualisieren</value></data>
+  <data name="ServerError" xml:space="preserve"><value>Der Server ist vorübergehend nicht verfügbar. Versuchen Sie es erneut.</value></data>
+  <data name="LoadMore" xml:space="preserve"><value>Mehr laden</value></data>
+  <data name="CustomerNotFound" xml:space="preserve"><value>Kunde nicht gefunden. Prüfen Sie die Kunden-ID.</value></data>
+  <data name="LastEvent" xml:space="preserve"><value>Letztes Ereignis</value></data>
+  <data name="StatusCode" xml:space="preserve"><value>Status {0}</value></data>
+  <data name="DeviceNotFound" xml:space="preserve"><value>Gerät nicht gefunden. Aktualisieren Sie die Geräteliste.</value></data>
+  <data name="DeviceCode" xml:space="preserve"><value>Gerätecode</value></data>
+  <data name="ConnectionError" xml:space="preserve"><value>Server nicht erreichbar. Prüfen Sie die Verbindung und versuchen Sie es erneut.</value></data>
 </root>

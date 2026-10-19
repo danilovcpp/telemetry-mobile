@@ -10,7 +10,7 @@
   <data name="CustomerId" xml:space="preserve"><value>ID клиента</value></data>
   <data name="Password" xml:space="preserve"><value>Пароль</value></data>
   <data name="SignIn" xml:space="preserve"><value>Войти</value></data>
-  <data name="RequiredCustomer" xml:space="preserve"><value>Укажите ID клиента.</value></data>
+  <data name="RequiredCustomer" xml:space="preserve"><value>Введите положительный числовой ID клиента.</value></data>
   <data name="RequiredPassword" xml:space="preserve"><value>Введите пароль.</value></data>
   <data name="AuthUnavailable" xml:space="preserve"><value>Сервис авторизации пока не подключён.</value></data>
   <data name="Online" xml:space="preserve"><value>Онлайн</value></data>
@@ -41,15 +41,15 @@
   <data name="LightTheme" xml:space="preserve"><value>Светлая тема</value></data>
   <data name="Devices" xml:space="preserve"><value>Устройства</value></data>
   <data name="Search" xml:space="preserve"><value>Поиск</value></data>
-  <data name="SearchDevices" xml:space="preserve"><value>Название или IP-адрес</value></data>
+  <data name="SearchDevices" xml:space="preserve"><value>Название или код устройства</value></data>
   <data name="Menu" xml:space="preserve"><value>Меню</value></data>
   <data name="Cancel" xml:space="preserve"><value>Отмена</value></data>
   <data name="SignOut" xml:space="preserve"><value>Выйти</value></data>
   <data name="Filter" xml:space="preserve"><value>Фильтр</value></data>
   <data name="Back" xml:space="preserve"><value>Назад</value></data>
-  <data name="DemoCredentials" xml:space="preserve"><value>Демо-вход: test / test</value></data>
+  <data name="DemoCredentials" xml:space="preserve"><value>Для демо: ID клиента 1–10, любой пароль.</value></data>
   <data name="InvalidCredentials" xml:space="preserve"><value>Неверные данные. Для демо используйте test / test.</value></data>
-  <data name="NoDevices" xml:space="preserve"><value>Устройства не найдены. Измените поиск или фильтр.</value></data>
+  <data name="NoDevices" xml:space="preserve"><value>Устройства не найдены.</value></data>
   <data name="NoEvents" xml:space="preserve"><value>Событий пока нет.</value></data>
   <data name="Information" xml:space="preserve"><value>Информация</value></data>
   <data name="Alarm" xml:space="preserve"><value>Аварии</value></data>
@@ -74,4 +74,16 @@
   <data name="HighTemperature" xml:space="preserve"><value>Высокая температура</value></data>
   <data name="ScheduledRestart" xml:space="preserve"><value>Плановая перезагрузка</value></data>
   <data name="PowerFailure" xml:space="preserve"><value>Ошибка питания</value></data>
+  <data name="LastStatus" xml:space="preserve"><value>Последний статус</value></data>
+  <data name="RetryAfter" xml:space="preserve"><value>Сервер занят. Повторите попытку через {0} сек.</value></data>
+  <data name="InvalidResponse" xml:space="preserve"><value>Не удалось прочитать ответ сервера. Повторите попытку.</value></data>
+  <data name="Refresh" xml:space="preserve"><value>Обновить</value></data>
+  <data name="ServerError" xml:space="preserve"><value>Сервер временно недоступен. Повторите попытку.</value></data>
+  <data name="LoadMore" xml:space="preserve"><value>Загрузить ещё</value></data>
+  <data name="CustomerNotFound" xml:space="preserve"><value>Клиент с таким ID не найден. Проверьте ID клиента.</value></data>
+  <data name="LastEvent" xml:space="preserve"><value>Последнее событие</value></data>
+  <data name="StatusCode" xml:space="preserve"><value>Статус {0}</value></data>
+  <data name="DeviceNotFound" xml:space="preserve"><value>Устройство не найдено. Обновите список устройств.</value></data>
+  <data name="DeviceCode" xml:space="preserve"><value>Код устройства</value></data>
+  <data name="ConnectionError" xml:space="preserve"><value>Не удалось связаться с сервером. Проверьте подключение и повторите попытку.</value></data>
 </root>

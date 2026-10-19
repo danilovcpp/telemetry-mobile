@@ -1,45 +1,64 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using TelemetryMobile.Models;
 using TelemetryMobile.Services;
 
 namespace TelemetryMobile.PageModels;
 
-public partial class EventsPageModel : ObservableObject
+public partial class EventsPageModel(ITelemetryApi api, CustomerSession session, DemoNavigationService navigation) : RemotePageModel
 {
-    private readonly MockTelemetryService data;
-    private readonly DemoNavigationService navigation;
-    private string selectedFilter = "All";
-    private string? deviceId;
+    private DeviceEventFeed? feed;
+    private int? deviceId;
     [ObservableProperty] private IReadOnlyList<EventItem> events = [];
     [ObservableProperty] private bool isDeviceScope;
     [ObservableProperty] private string deviceName = string.Empty;
-    public IReadOnlyList<FilterOption> Filters { get; }
+    [ObservableProperty] private bool hasMore;
 
-    public EventsPageModel(MockTelemetryService data, DemoNavigationService navigation)
-    {
-        this.data = data;
-        this.navigation = navigation;
-        Filters = new[] { "All", "Information", "Warning", "Alarm" }.Select(key => new FilterOption(key, key, SelectFilterCommand) { IsSelected = key == "All" }).ToArray();
-        Refresh();
-    }
-
-    public void SetDevice(string? id)
+    public void SetDevice(int? id)
     {
         deviceId = id;
         IsDeviceScope = id is not null;
-        DeviceName = data.Devices.FirstOrDefault(d => d.Id == id)?.Name ?? string.Empty;
-        Refresh();
+        feed = null;
+        Events = [];
+        HasMore = false;
     }
 
-    [RelayCommand] private void SelectFilter(string value)
+    [RelayCommand]
+    public Task RefreshAsync() => RunAsync(async cancellationToken =>
     {
-        selectedFilter = value;
-        foreach (var filter in Filters) filter.IsSelected = filter.Value == value;
-        Refresh();
-    }
+        feed = null;
+        HasMore = false;
+        Events = [];
+        if (session.CustomerId is not { } customerId) return;
+        // Resolve scope through the selected customer's list, never through another customer's cache.
+        var devices = await api.GetDevicesAsync(customerId, cancellationToken);
+        var selected = deviceId is { } id ? devices.Where(d => d.Id == id).ToArray() : devices;
+        DeviceName = IsDeviceScope ? selected.FirstOrDefault()?.Name ?? string.Empty : string.Empty;
+        feed = new DeviceEventFeed(api, selected);
+        await AppendAsync(cancellationToken);
+    });
 
-    private void Refresh() => Events = data.Events
-        .Where(e => deviceId is null || e.DeviceId == deviceId)
-        .Where(e => selectedFilter == "All" || e.Severity.ToString() == selectedFilter)
-        .Select(e => new EventItem(e, data.Devices.First(d => d.Id == e.DeviceId), navigation)).ToArray();
+    [RelayCommand]
+    private Task LoadMoreAsync() => RunAsync(async cancellationToken =>
+    {
+        if (feed is null || !feed.HasMore) return;
+        try { await AppendAsync(cancellationToken); }
+        catch (TelemetryApiException error) when (error.Code == "pagination.invalid_cursor")
+        {
+            // Cursors are short-lived and scoped to one device. Restart the entire merged history.
+            feed = null;
+            Events = [];
+            HasMore = false;
+            var devices = await api.GetDevicesAsync(session.CustomerId!.Value, cancellationToken);
+            feed = new DeviceEventFeed(api, deviceId is { } id ? devices.Where(d => d.Id == id).ToArray() : devices);
+            await AppendAsync(cancellationToken);
+        }
+    });
+
+    private async Task AppendAsync(CancellationToken cancellationToken)
+    {
+        var page = await feed!.LoadMoreAsync(cancellationToken);
+        Events = Events.Concat(page.Select(e => new EventItem(e.Event, e.Device, navigation))).DistinctBy(e => e.Id).ToArray();
+        HasMore = feed.HasMore;
+    }
 }
